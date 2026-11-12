@@ -18,6 +18,12 @@ at the same location, or update those links when restoring on another machine.
 The configuration also contains machine-specific absolute paths and references
 to separately installed applications, plugins, and MCP servers.
 
+The shared-skills automation runs `bin/sync-robuust-skills`. Its exclusion list
+keeps intentionally removed skills from being linked again. Update that list
+when changing which shared skills should stay uninstalled. Use this local
+script for synchronization; the shared repository's `scripts/sync-local.sh`
+links every shared skill and overwrites the local `AGENTS.md`.
+
 ## Excluded files
 
 The root allowlist in `.gitignore` excludes authentication files, credentials,

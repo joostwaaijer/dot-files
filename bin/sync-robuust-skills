@@ -15,6 +15,16 @@ for skill_path in "$REPO_DIR"/skills/*; do
     [ -d "$skill_path" ] || continue
 
     skill_name=${skill_path##*/}
+
+    # Keep intentionally removed shared skills uninstalled.
+    case "$skill_name" in
+        deferred-validation-development|github-issues|gtm-patterns-craft|\
+        infer-craft-conventions|moneybird-servicekaart-invoicing|\
+        seo-patterns-craft|tailwind-patterns-twig)
+            continue
+            ;;
+    esac
+
     local_skill="$AGENT_HOME/skills/$skill_name"
 
     if [ -L "$local_skill" ]; then
