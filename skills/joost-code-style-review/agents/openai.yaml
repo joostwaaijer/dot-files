@@ -1,0 +1,4 @@
+interface:
+  display_name: "Joost Code Style Review"
+  short_description: "Review code using Joost's coding preferences"
+  default_prompt: "Use $joost-code-style-review alongside the existing code review to assess this diff against Joost's coding preferences."

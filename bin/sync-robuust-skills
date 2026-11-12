@@ -1,0 +1,39 @@
+#!/bin/sh
+set -eu
+
+REPO_DIR=${ROBUUST_AGENTS_DIR:-/Users/joostwaaijer/Documents/workspace/robuust-agents}
+AGENT_HOME=${AGENT_HOME:-${CODEX_HOME:-"$HOME/.codex"}}
+
+cd "$REPO_DIR"
+
+git switch main
+git pull --ff-only origin main
+
+mkdir -p "$AGENT_HOME/skills"
+
+for skill_path in "$REPO_DIR"/skills/*; do
+    [ -d "$skill_path" ] || continue
+
+    skill_name=${skill_path##*/}
+    local_skill="$AGENT_HOME/skills/$skill_name"
+
+    if [ -L "$local_skill" ]; then
+        [ "$(readlink "$local_skill")" = "$skill_path" ] || rm "$local_skill"
+    elif [ -e "$local_skill" ]; then
+        echo "Skipping $skill_name: $local_skill is not a symlink" >&2
+        continue
+    fi
+
+    [ -L "$local_skill" ] || ln -s "$skill_path" "$local_skill"
+done
+
+for local_skill in "$AGENT_HOME"/skills/*; do
+    [ -L "$local_skill" ] || continue
+
+    skill_path=$(readlink "$local_skill")
+    case "$skill_path" in
+        "$REPO_DIR"/skills/*)
+            [ -e "$skill_path" ] || rm "$local_skill"
+            ;;
+    esac
+done

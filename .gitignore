@@ -1,0 +1,37 @@
+# Track only explicitly selected configuration and user-managed files.
+# New runtime files stay excluded until deliberately allowed here.
+/*
+!/.gitignore
+!/README.md
+!/AGENTS.md
+!/config.toml
+!/git-instructions
+!/bin/
+!/bin/**
+!/rules/
+!/rules/**
+!/skills/
+!/skills/**
+!/automations/
+/automations/*
+!/automations/*/
+/automations/*/*
+!/automations/*/automation.toml
+
+# Bundled system skills, old backups, generated files, and credentials.
+/skills/.*
+.DS_Store
+__pycache__/
+node_modules/
+*.pyc
+*.bak
+*.tmp
+*.log
+*.sqlite*
+*.db
+.env
+.env.*
+*.pem
+*.key
+.credentials*
+auth.json*

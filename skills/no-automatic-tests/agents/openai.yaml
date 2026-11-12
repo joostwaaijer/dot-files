@@ -1,0 +1,7 @@
+interface:
+  display_name: "No Automatic Tests"
+  short_description: "Only write or run tests when explicitly requested"
+  default_prompt: "Use $no-automatic-tests while working in this repo."
+
+policy:
+  allow_implicit_invocation: false

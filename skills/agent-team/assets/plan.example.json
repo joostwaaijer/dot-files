@@ -1,0 +1,43 @@
+{
+  "schema": "agent-team-plan/1",
+  "objective": "EXAMPLE: expose one agreed backend contract and render it in the frontend",
+  "independent_review": true,
+  "limits": {
+    "max_parallel": 6,
+    "delegation_depth": 1,
+    "max_retries": 1,
+    "max_rework_cycles": 2
+  },
+  "repositories": [
+    {"id": "backend", "root": "/path/to/backend", "branch": "feature/example", "base": "replace-with-current-revision", "local_changes": "inspect before edits"},
+    {"id": "frontend", "root": "/path/to/frontend", "branch": "feature/example", "base": "replace-with-current-revision", "local_changes": "inspect before edits"}
+  ],
+  "authorization": {
+    "read": "EXAMPLE: replace with the actual task instruction",
+    "edit": "EXAMPLE: replace with the actual implementation authorization"
+  },
+  "contracts_existing": [],
+  "packages": [
+    {
+      "id": "contract", "owner": "lead", "kind": "decide", "repository": "backend",
+      "writes": [], "depends_on": [], "produces": ["public-view"], "consumes": [],
+      "actions": ["read"], "criteria": ["AC-CONTRACT"], "skills": ["codebase-design"]
+    },
+    {
+      "id": "backend-code", "owner": "backend-worker", "kind": "implement", "repository": "backend",
+      "writes": ["src/public-view/"], "depends_on": ["contract"], "produces": [], "consumes": ["public-view"],
+      "actions": ["read", "edit"], "criteria": ["AC-BACKEND"], "skills": ["project-backend-skill"]
+    },
+    {
+      "id": "frontend-code", "owner": "frontend-worker", "kind": "implement", "repository": "frontend",
+      "writes": ["src/public-view/"], "depends_on": ["contract"], "produces": [], "consumes": ["public-view"],
+      "actions": ["read", "edit"], "criteria": ["AC-FRONTEND"], "skills": ["project-frontend-skill"]
+    },
+    {
+      "id": "integrated-review", "owner": "independent-reviewer", "kind": "review", "repository": "backend",
+      "writes": [], "depends_on": ["backend-code", "frontend-code"], "produces": [], "consumes": ["public-view"],
+      "reviews": ["backend-code", "frontend-code"],
+      "actions": ["read"], "criteria": ["AC-INTEGRATED-REVIEW"], "skills": ["code-review"]
+    }
+  ]
+}

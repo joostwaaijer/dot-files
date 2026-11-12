@@ -1,0 +1,43 @@
+{
+  "schema": "agent-team-state/1",
+  "run_id": "replace-with-task-run-id",
+  "objective_ref": "existing roadmap, issue, specification, or user request",
+  "coordinator": {"thread_id": "replace-with-coordinator-id", "host_id": "local"},
+  "updated_at": null,
+  "agent_usage": {
+    "session_spawn_limit": null,
+    "spawned_total": 0,
+    "agent_ids": []
+  },
+  "project_context_ref": "existing initialization or project brief",
+  "requirements_ref": "canonical issue/specification or requirements register",
+  "domain_model_ref": "canonical domain/model document, or not applicable with reason",
+  "roadmap_ref": "canonical roadmap",
+  "discovery_status": "not_started",
+  "steps": [
+    {
+      "id": "step-01",
+      "goal_ref": "canonical requirement or roadmap item",
+      "source_refs": [],
+      "contract_refs": [],
+      "depends_on": [],
+      "task": null,
+      "checkout_owners": [],
+      "readiness": "not_assessed",
+      "implementation": "not_started",
+      "review": "not_started",
+      "publication": "local_only",
+      "merge": "not_assessed",
+      "deployment": "not_assessed",
+      "acceptance": "unverified",
+      "required_prs": [],
+      "rollout_dependencies": [],
+      "criteria": [],
+      "evidence": [],
+      "open_findings": [],
+      "blockers": [],
+      "last_report_ref": null,
+      "next_action": "establish readiness from the current authoritative artifacts"
+    }
+  ]
+}

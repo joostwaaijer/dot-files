@@ -1,0 +1,637 @@
+model = "gpt-6.1-sol"
+model_reasoning_effort = "high"
+personality = "pragmatic"
+sandbox_mode = "danger-full-access"
+zsh_path = "/opt/homebrew/bin/zsh"
+notify = ["/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+service_tier = "default"
+
+[projects."/Users/joostwaaijer/Documents/workspace/haarhuis-portaal"]
+trust_level = "trusted"
+
+[features]
+multi_agent = true
+memories = true
+undo = true
+js_repl = false
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[plugins."google-drive@openai-curated"]
+enabled = true
+
+[plugins."notion@openai-curated"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."gmail@openai-curated"]
+enabled = true
+
+[plugins."slack@openai-curated"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."cloudflare@openai-curated-remote".mcp_servers.cloudflare-api.tools.execute]
+approval_mode = "approve"
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."browser@openai-bundled"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[mcp_servers.github]
+url = "https://api.githubcopilot.com/mcp/"
+bearer_token_env_var = "GITHUB_PAT_TOKEN"
+
+[mcp_servers.buildkite]
+url = "https://mcp.buildkite.com/mcp"
+
+[mcp_servers."robuust-vue-components"]
+command = "/Users/joostwaaijer/.nvm/versions/node/v22.22.0/bin/node"
+args = ["/Users/joostwaaijer/Documents/workspace/vue-components/mcp/server.mjs"]
+
+[mcp_servers."robuust-vue-components".tools.get_component]
+approval_mode = "approve"
+
+[mcp_servers."robuust-vue-components".tools.library_overview]
+approval_mode = "approve"
+
+[mcp_servers."robuust-vue-components".tools.list_components]
+approval_mode = "approve"
+
+[mcp_servers.balsamiq]
+url = "https://bais.balsamiq.com/mcp"
+
+[mcp_servers.laravel-boost]
+command = "php"
+args = ["artisan", "boost:mcp"]
+
+[mcp_servers.harvest]
+url = "https://api.harvestapp.com/mcp"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node_repl"
+env_vars = ["BROWSER_USE_ACCESS_EXECUTOR_ID", "BROWSER_USE_ACCESS_PIPE_PATH", "BROWSER_USE_ACCESS_VERIFYING_IDENTITY"]
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/joostwaaijer/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
+CODEX_HOME = "/Users/joostwaaijer/.codex"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab,mcpapps"
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.1106.51428"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/joostwaaijer/.codex/plugins/cache/openai-bundled/browser/26.1106.51428/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+SKY_CUA_SERVICE_PATH = "/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app"
+CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
+
+[mcp_servers.computer-use]
+command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
+args = ["mcp"]
+cwd = "."
+enabled = true
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/Users/joostwaaijer/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/Users/joostwaaijer/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
+
+[marketplaces.claude-plugins-official]
+source_type = "git"
+source = "https://github.com/anthropics/claude-plugins-official.git"
+
+[marketplaces.cloudflare]
+source_type = "git"
+source = "https://github.com/cloudflare/skills.git"
+
+[desktop]
+localeOverride = "en-US"
+preventSleepWhileRunning = true
+keepRemoteControlAwakeWhilePluggedIn = true
+git-branch-prefix = "feature/"
+git-show-sidebar-pr-icons = false
+git-commit-instructions = "- Use Conventional Commits for all commit messages and pull request titles created by an agent.\n- Format commit messages and pull request titles as: `<type>(<scope>): <short imperative description>`.\n- Keep commit messages under 50 characters.\n- Keep titles in English, concise, and technically specific.\n- Use lowercase `type` and `scope`.\n- Prefer these types:\n  - `feat` for new functionality\n  - `fix` for bug fixes\n  - `refactor` for code changes without behavior changes\n  - `style` for formatting-only changes\n  - `test` for test-only changes\n  - `docs` for documentation-only changes\n  - `build` for build tooling, package, or dependency changes\n  - `ci` for CI configuration changes\n  - `chore` for maintenance that does not fit the above\n- Choose a scope that matches the affected component, package, module, or concern, for example `drawer`, `button`, `deps`, `release`, or `types`.\n- Do not invent vague scopes such as `misc`, `stuff`, or `updates`.\n- Use a clear imperative description after the colon, for example:\n  - `feat(drawer): add panel background color token`\n  - `fix(button): preserve disabled state during loading`\n  - `build(deps): update vite and vitest`\n- If a repository already has a stricter commit or PR title convention, follow the repository convention.\n- If the agent creates multiple commits, each commit must follow Conventional Commits individually.\n"
+notifications-turn-mode = "always"
+dock-icon-preference = "codex-system"
+show-context-window-usage = true
+open-link-in-target-preference = "in-app-browser"
+conversationDetailMode = "STEPS_COMMANDS"
+code-review-local-instructions = "Check even waarom alle skills van Laravel Boost opeens worden verwijderd."
+git-create-pull-request-as-draft = false
+reviewDelivery = "detached"
+git-pr-instructions = "- Before creating or updating a pull request, find the repository’s existing pull request template without assuming a specific filename or location, and preserve its structure.\n- Replace all placeholder text, complete applicable checkboxes accurately, and mark non-applicable sections or items explicitly as `N/A`. Do not silently remove template sections.\n- Do not add standalone prose listing validations, tests, or commands run. Only complete validation-related fields already required by the template.\n- Add supplementary context only after the completed template and only when it helps reviewers.\n- Use Conventional Commits for all commit messages and pull request titles created by an agent.\n- Format commit messages and pull request titles as: `<type>(<scope>): <short imperative description>`.\n- Keep commit messages under 50 characters.\n- Keep titles in English, concise, and technically specific.\n- Use lowercase `type` and `scope`.\n- Prefer these types:\n  - `feat` for new functionality\n  - `fix` for bug fixes\n  - `refactor` for code changes without behavior changes\n  - `style` for formatting-only changes\n  - `test` for test-only changes\n  - `docs` for documentation-only changes\n  - `build` for build tooling, package, or dependency changes\n  - `ci` for CI configuration changes\n  - `chore` for maintenance that does not fit the above\n- Choose a scope that matches the affected component, package, module, or concern, for example `drawer`, `button`, `deps`, `release`, or `types`.\n- Do not invent vague scopes such as `misc`, `stuff`, or `updates`.\n- Use a clear imperative description after the colon, for example:\n  - `feat(drawer): add panel background color token`\n  - `fix(button): preserve disabled state during loading`\n  - `build(deps): update vite and vitest`\n- If a repository already has a stricter commit or PR title convention, follow the repository convention.\n- If the agent creates a pull request, the PR title must also follow Conventional Commits and describe the overall change.\n"
+git-pr-watch-auto-merge = true
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "persistent", "max"]
+migratedFollowUpQueueToSteer = true
+
+[shell_environment_policy.set]
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
+
+[[skills.config]]
+path = "/Users/joostwaaijer/Documents/workspace/robuust-agents/skills/github-issues/SKILL.md"
+enabled = false
+
+[projects."/Users/joostwaaijer/Documents/workspace/4seasons-outdoor"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/albo"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/all-in-crystal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/beijer-logistics"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/beijer-logistics-portal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/bellezi"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/bellezi-erp"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/betonlook"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/beweeg-wijs"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/beweeg-wijs-pleinprogramma"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/blent"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/bluelepehant"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/bookmydesk"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/buildingdesign"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/ckc-webshop"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/ckc-webshop-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/clubee-admin"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/clubee-v2"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/commerce"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/commerce-5"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/commerce-mollie-plus"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/country-hill"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-6"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-assetusage"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-commerce-stripe-checkout"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-contact-form-extensions"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-contact-form-extensions-robuust"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-twig-template"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/deterink"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/deventer-ziekenhuis"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/ditt-benchmark"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/equiception-crm"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/fpl-dashboard"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/heerdink-planning"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/heerdink-planning-app"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/hmstubbergen"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/jotem"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kotter-living"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kotter-living-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kovax"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kovax-partnernet"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kreuwel"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kreuwel-dashboard"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/kuipers-logistics-portal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/laravel-heroku-queue-listener"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/laravel-inertia-template"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/laravel-inertia-template-l13"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/leef-twente"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/leenders"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/leenders-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/liberein"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/licent"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/licent-hypotheken-hub"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/loogisch-portaal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/loohuis"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/loohuis-corporate"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/loop-esch-door"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/luma-group"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/lunar-scan"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/lycens"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/mennegat-trading"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/mmo-provider"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/nzo-elearning"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/planting-power-app"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/q-line"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/reggeborgh"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/reitsema-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/robuust-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/robuust-new"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/robuust-skills"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/rock-am-esch"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/rocvantwente"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/rrs-cit"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/salland-kliniek"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/salta"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/saxenburgh"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/sheetmetal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/statamic-site"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/t1-designer"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/t1-portal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/t1-presentation"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/t1-ui"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/talentned"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/ter-steege-bouw"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/vastgoedmonitor"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/visscher-traffic"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/visscher-traffic-floot"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/volea"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/vue-components"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/vuetify-3"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/walborg"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/wbo-wonen"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/werkenbijrocvantwente"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/weusthuis"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/wtc-export-scan"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/zelfzorgensamendoen"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/zipnet"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/zsm-brigante"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/zusters-van-denekamp"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/.codex"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-06-03/sites-plugin-sites-openai-bundled-create"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/inventflow-portaal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-06-11/can-you-help-me-predict-my"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-06-12/i-want-you-to-update-your"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/oopspam"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/steggink"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/orva"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/salta-inertia"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/top-website"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-07-20/referenced-chatgpt-conversation-this-is-untrusted"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-07-20/new-chat"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-07-20/we"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-07-24/o"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-07-29/can"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/t1-api"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-12/che"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-13/disk-space-is-getting-full-agian"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/sas"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-17/vo"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-17/wij-gaan-met-8-man-van"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-20/can"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-21/my"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-24/we"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-08-31/let-s-set-up-a-scheduled"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/loohuis-service"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-01/prepare-and-send-joost-waaijer-s"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-03/can"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-04/wh"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/vv-langeveen"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-05/ca"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/codex-astra-luna-orchestrator"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-17/how"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-17/is"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/home-assistant"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/huisartsenzorg-twente"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/robuust-agents"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/egberts-rubber-measurements"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-23/sites-plugin-sites-openai-curated-remote"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/Codex/2026-09-25/ik-wil-een-spotprent-parodie-maken"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/mcp-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-jobylon"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-hzt"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/hzt-website"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/addsoft-storec-archive"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/.polyscope/clones/b8a7f285/grand-lemur"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/ons-nest"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/.codex/agent-loops/ons-nest/repository"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/jabe-cms"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/jabe"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/ChatGPT/Craft Plugins"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft6-playground"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-inertia-poc"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-inertia"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/robuust"]
+trust_level = "trusted"
+
+[agents]
+max_concurrent_threads_per_session = 6
