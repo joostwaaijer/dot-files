@@ -2,7 +2,8 @@ version = 1
 id = "sync-robuust-shared-skills"
 kind = "cron"
 name = "Sync Robuust shared skills"
-prompt = "Work only with /Users/joostwaaijer/Documents/workspace/robuust-agents and /Users/joostwaaijer/.codex. Record the repository HEAD before doing anything. Run /Users/joostwaaijer/.codex/bin/sync-robuust-skills. If it fails, do not reset, stash, overwrite, or otherwise alter Git state; report the blocker and stop. After a successful sync, record the new HEAD. The local script is personal configuration: never modify it. Never modify, replace, symlink, or overwrite /Users/joostwaaijer/.codex/AGENTS.md. If the shared org template agents/templates/org/AGENTS.md changed between the old and new commits, notify me with a concise section-by-section summary and explicit, minimal instructions for manually incorporating any relevant rules into my personal AGENTS.md. Do not merge it automatically. If neither the upstream revision nor installed shared skill symlinks changed, end without a user-facing update. Do not commit or push."
+prompt = "Work only with /Users/joostwaaijer/Documents/workspace/robuust-agents and /Users/joostwaaijer/.codex. Record the repository HEAD and the two desktop Git instruction fields (git-commit-instructions and git-pr-instructions) before doing anything. Run /Users/joostwaaijer/.codex/bin/sync-robuust-skills. Synchronize only when the shared repository checkout is clean and already on main. If the script reports \"Skipped synchronization:\", report its reason and stop; do not switch branches, clean the checkout, or suppress the skipped-run report under the no-change rule below. If it fails, do not reset, stash, overwrite, or otherwise alter Git state; report the blocker and stop. The script also synchronizes the two desktop Git instruction fields from the shared agents/git Markdown files while preserving other configuration settings. After a successful sync, record the new HEAD and whether either desktop Git instruction field changed. The local script is personal configuration: never modify it. Never modify, replace, symlink, or overwrite /Users/joostwaaijer/.codex/AGENTS.md. If the shared org template agents/templates/org/AGENTS.md changed between the old and new commits, notify me with a concise section-by-section summary and explicit, minimal instructions for manually incorporating any relevant rules into my personal AGENTS.md. Do not merge it automatically. If the upstream revision, installed shared skill symlinks, and both desktop Git instruction fields are all unchanged, end without a user-facing update. Do not commit or push."
+model_prompt_sha256 = "8b4f947e2e9d3c8c761478a59257dcc4e4dfcc3f27851d021ef3db56ea188120"
 status = "ACTIVE"
 rrule = "FREQ=DAILY;BYHOUR=9;BYMINUTE=0"
 model = "gpt-5.6-luna"
@@ -11,4 +12,4 @@ execution_environment = "local"
 target = { type = "project", project_id = "local-b3b40c986e7ebb56c087ec0a0bfa5687" }
 cwds = ["/Users/joostwaaijer/Documents/workspace"]
 created_at = 1787576549942
-updated_at = 1790147312376
+updated_at = 1794559541791

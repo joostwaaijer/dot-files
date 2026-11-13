@@ -1,8 +1,6 @@
 model = "gpt-6.1-sol"
 model_reasoning_effort = "high"
-personality = "pragmatic"
 sandbox_mode = "danger-full-access"
-zsh_path = "/opt/homebrew/bin/zsh"
 notify = ["/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 service_tier = "default"
 
@@ -12,8 +10,6 @@ trust_level = "trusted"
 [features]
 multi_agent = true
 memories = true
-undo = true
-js_repl = false
 
 [plugins."github@openai-curated"]
 enabled = true
@@ -89,10 +85,6 @@ approval_mode = "approve"
 [mcp_servers.balsamiq]
 url = "https://bais.balsamiq.com/mcp"
 
-[mcp_servers.laravel-boost]
-command = "php"
-args = ["artisan", "boost:mcp"]
-
 [mcp_servers.harvest]
 url = "https://api.harvestapp.com/mcp"
 
@@ -118,12 +110,6 @@ BROWSER_USE_CODEX_APP_VERSION = "26.1106.51428"
 NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/joostwaaijer/.codex/plugins/cache/openai-bundled/browser/26.1106.51428/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
 SKY_CUA_SERVICE_PATH = "/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
-
-[mcp_servers.computer-use]
-command = "./Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient"
-args = ["mcp"]
-cwd = "."
-enabled = true
 
 [marketplaces.openai-bundled]
 source_type = "local"
@@ -153,7 +139,7 @@ dock-icon-preference = "codex-system"
 show-context-window-usage = true
 open-link-in-target-preference = "in-app-browser"
 conversationDetailMode = "STEPS_COMMANDS"
-code-review-local-instructions = "Joost Code Style Review "
+code-review-local-instructions = "Apply $joost-code-style-review at /Users/joostwaaijer/.codex/skills/joost-code-style-review/SKILL.md alongside the existing correctness, requirements, and repository-standards review. Report personal preferences separately as non-blocking suggestions. Preserve the required review output schema; omit preference-only suggestions if that schema cannot represent them."
 git-create-pull-request-as-draft = false
 reviewDelivery = "detached"
 git-pr-instructions = "- Before creating or updating a pull request, find the repository’s existing pull request template without assuming a specific filename or location, and preserve its structure.\n- Replace all placeholder text, complete applicable checkboxes accurately, and mark non-applicable sections or items explicitly as `N/A`. Do not silently remove template sections.\n- Do not add standalone prose listing validations, tests, or commands run. Only complete validation-related fields already required by the template.\n- Add supplementary context only after the completed template and only when it helps reviewers.\n- Use Conventional Commits for all commit messages and pull request titles created by an agent.\n- Format commit messages and pull request titles as: `<type>(<scope>): <short imperative description>`.\n- Keep commit messages under 50 characters.\n- Keep titles in English, concise, and technically specific.\n- Use lowercase `type` and `scope`.\n- Prefer these types:\n  - `feat` for new functionality\n  - `fix` for bug fixes\n  - `refactor` for code changes without behavior changes\n  - `style` for formatting-only changes\n  - `test` for test-only changes\n  - `docs` for documentation-only changes\n  - `build` for build tooling, package, or dependency changes\n  - `ci` for CI configuration changes\n  - `chore` for maintenance that does not fit the above\n- Choose a scope that matches the affected component, package, module, or concern, for example `drawer`, `button`, `deps`, `release`, or `types`.\n- Do not invent vague scopes such as `misc`, `stuff`, or `updates`.\n- Use a clear imperative description after the colon, for example:\n  - `feat(drawer): add panel background color token`\n  - `fix(button): preserve disabled state during loading`\n  - `build(deps): update vite and vitest`\n- If a repository already has a stricter commit or PR title convention, follow the repository convention.\n- If the agent creates a pull request, the PR title must also follow Conventional Commits and describe the overall change.\n"
@@ -302,9 +288,6 @@ trust_level = "trusted"
 [projects."/Users/joostwaaijer/Documents/workspace/laravel-inertia-template"]
 trust_level = "trusted"
 
-[projects."/Users/joostwaaijer/Documents/workspace/laravel-inertia-template-l13"]
-trust_level = "trusted"
-
 [projects."/Users/joostwaaijer/Documents/workspace/leef-twente"]
 trust_level = "trusted"
 
@@ -369,9 +352,6 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/joostwaaijer/Documents/workspace/robuust-new"]
-trust_level = "trusted"
-
-[projects."/Users/joostwaaijer/Documents/workspace/robuust-skills"]
 trust_level = "trusted"
 
 [projects."/Users/joostwaaijer/Documents/workspace/rock-am-esch"]
@@ -518,9 +498,6 @@ trust_level = "trusted"
 [projects."/Users/joostwaaijer/Documents/Codex/2026-08-13/disk-space-is-getting-full-agian"]
 trust_level = "trusted"
 
-[projects."/Users/joostwaaijer/sas"]
-trust_level = "trusted"
-
 [projects."/Users/joostwaaijer/Documents/Codex/2026-08-17/vo"]
 trust_level = "trusted"
 
@@ -593,9 +570,6 @@ trust_level = "trusted"
 [projects."/Users/joostwaaijer/Documents/workspace/craft-hzt"]
 trust_level = "trusted"
 
-[projects."/Users/joostwaaijer/Documents/workspace/hzt-website"]
-trust_level = "trusted"
-
 [projects."/Users/joostwaaijer/Documents/workspace/addsoft-storec-archive"]
 trust_level = "trusted"
 
@@ -614,13 +588,7 @@ trust_level = "trusted"
 [projects."/Users/joostwaaijer/Documents/workspace/jabe"]
 trust_level = "trusted"
 
-[projects."/Users/joostwaaijer/Documents/ChatGPT/Craft Plugins"]
-trust_level = "trusted"
-
 [projects."/Users/joostwaaijer/Documents/workspace/craft6-playground"]
-trust_level = "trusted"
-
-[projects."/Users/joostwaaijer/Documents/workspace/craft-inertia-poc"]
 trust_level = "trusted"
 
 [projects."/Users/joostwaaijer/Documents/workspace/craft-inertia"]

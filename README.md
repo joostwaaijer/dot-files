@@ -18,7 +18,19 @@ at the same location, or update those links when restoring on another machine.
 The configuration also contains machine-specific absolute paths and references
 to separately installed applications, plugins, and MCP servers.
 
-The shared-skills automation runs `bin/sync-robuust-skills`. Its exclusion list
+The local copies of `code-review`, `codebase-design`, `diagnosing-bugs`,
+`domain-modeling`, `research`, `resolving-merge-conflicts`, and
+`writing-for-agents` were installed from
+[mattpocock/skills](https://github.com/mattpocock/skills) and customized for
+personal use. They are now maintained directly in `skills/`; their former
+`~/.agents/skills/` paths are no longer used. Original installation metadata
+is retained in `skills/upstream-sources.json`.
+
+The shared-skills automation runs `bin/sync-robuust-skills`. Synchronization
+requires a clean checkout already on `main`; otherwise it skips the run and
+reports the reason. It also updates the desktop commit and pull request
+instructions from the shared `agents/git/` Markdown files, preserving other
+configuration settings. Its exclusion list
 keeps intentionally removed skills from being linked again. Update that list
 when changing which shared skills should stay uninstalled. Use this local
 script for synchronization; the shared repository's `scripts/sync-local.sh`

@@ -6,8 +6,20 @@ AGENT_HOME=${AGENT_HOME:-${CODEX_HOME:-"$HOME/.codex"}}
 
 cd "$REPO_DIR"
 
-git switch main
+current_branch=$(git branch --show-current)
+if [ "$current_branch" != "main" ]; then
+    printf 'Skipped synchronization: checkout is on %s, not main.\n' "${current_branch:-detached HEAD}"
+    exit 0
+fi
+
+if [ -n "$(git status --porcelain)" ]; then
+    printf 'Skipped synchronization: checkout has local changes.\n'
+    exit 0
+fi
+
 git pull --ff-only origin main
+
+python3 "$REPO_DIR/scripts/sync-git-settings.py" --agent-home "$AGENT_HOME"
 
 mkdir -p "$AGENT_HOME/skills"
 
