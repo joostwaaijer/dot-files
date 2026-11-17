@@ -1,0 +1,27 @@
+- Before creating or updating a pull request, find the repository’s existing pull request template without assuming a specific filename or location, and preserve its structure.
+- Replace all placeholder text, complete applicable checkboxes accurately, and mark non-applicable sections or items explicitly as `N/A`. Do not silently remove template sections.
+- Do not add standalone prose listing validations, tests, or commands run. Only complete validation-related fields already required by the template.
+- Add supplementary context only after the completed template and only when it helps reviewers.
+- Use Conventional Commits for all commit messages and pull request titles created by an agent.
+- Format commit messages and pull request titles as: `<type>(<scope>): <short imperative description>`.
+- Keep commit messages under 50 characters.
+- Keep titles in English, concise, and technically specific.
+- Use lowercase `type` and `scope`.
+- Prefer these types:
+  - `feat` for new functionality
+  - `fix` for bug fixes
+  - `refactor` for code changes without behavior changes
+  - `style` for formatting-only changes
+  - `test` for test-only changes
+  - `docs` for documentation-only changes
+  - `build` for build tooling, package, or dependency changes
+  - `ci` for CI configuration changes
+  - `chore` for maintenance that does not fit the above
+- Choose a scope that matches the affected component, package, module, or concern, for example `drawer`, `button`, `deps`, `release`, or `types`.
+- Do not invent vague scopes such as `misc`, `stuff`, or `updates`.
+- Use a clear imperative description after the colon, for example:
+  - `feat(drawer): add panel background color token`
+  - `fix(button): preserve disabled state during loading`
+  - `build(deps): update vite and vitest`
+- If a repository already has a stricter commit or PR title convention, follow the repository convention.
+- If the agent creates a pull request, the PR title must also follow Conventional Commits and describe the overall change.

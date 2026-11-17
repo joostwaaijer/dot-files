@@ -1,15 +1,21 @@
 # Work packages, handoffs, and evidence
 
-Keep the contract small enough to use. JSON records are useful for multiple waves or resumable work; a concise brief is sufficient for a bounded task. Operational state links authoritative artifacts instead of duplicating specifications or full command logs.
+Keep the contract small enough to use. Complex software Team work uses the checked plan below; smaller software runs and research or writing work use task briefs. Operational state links authoritative artifacts instead of duplicating specifications or full command logs.
+
+## Task briefs
+
+Use [work-package.md](../templates/work-package.md) with the applicable fields: outcome and acceptance references, owner, selected profile and application mode under [agent-profiles.md](agent-profiles.md), exact inputs and source locations, decisions, dependencies, write ownership, allowed actions with their authorization source, verification limits, review arrangements, and return expectations. Record retry/correction limits from [recovery.md](recovery.md) and any actual task budget.
+
+For research or writing, identify the source collection, document, or output workspace directly. Repository, branch, and base fields apply only when a repository is involved. Inspect dependencies and ownership directly; do not invent repositories or run the software plan checker solely to satisfy a format. [parallelism.md](parallelism.md) still governs scheduling and independent review.
 
 ## Plan format: agent-team-plan/1
 
-[plan.example.json](../assets/plan.example.json) illustrates the static checker input.
+[plan.example.json](../assets/plan.example.json) illustrates the static checker input required before delegation for non-trivial multi-wave or cross-repository software Team work.
 
 | Field | Meaning |
 | --- | --- |
 | `schema`, `objective` | Supported format and concrete outcome. |
-| `limits` | Positive `max_parallel` (default 6 subagents, coordinator excluded), `max_retries` (default 1), `max_rework_cycles` (default 2), and `delegation_depth` fixed at 1. Runtime limits may be lower. |
+| `limits` | Positive `max_parallel` and `delegation_depth` fixed at 1 under [parallelism.md](parallelism.md); nonnegative `max_retries` and `max_rework_cycles` under [recovery.md](recovery.md). Record task-specific limits; runtime limits may be lower. |
 | `repositories` | Unique `id` plus actual root, branch/worktree, base revision and local-change context when relevant. The checker compares repository IDs, not aliases or physical paths; the coordinator must confirm distinct IDs are truly distinct write surfaces. |
 | `authorization` | A map of allowed action names to actual user authorization references. A declaration records authority; it does not create it. |
 | `contracts_existing` | Existing contract identifiers and their authoritative references in the brief. |
@@ -22,7 +28,7 @@ Keep the contract small enough to use. JSON records are useful for multiple wave
 | `reviews` | Existing packages owned by other agents; the reviewer waits transitively for all of them. |
 | `actions` | Subset of declared authorization: `read`, `edit`, `write_tests`, `run_tests`, `commit`, `push`, `publish_pr`, `merge`, `deploy`, `message_chat`, `external_message`. Test writes require both edit and write_tests authority. |
 
-Record a shared edit surface under one repository ID. The checker conservatively compares paths case-insensitively. It does not inspect symlinks, actual diffs, Git state, tools, or external services, and does not enforce maximum concurrency at runtime. Its topological waves are a static scheduling preview, not a requirement to wait for an entire wave. Accept completed handoffs individually and start ready dependents as slots become available; count actual subagents against the live runtime limit. See [parallelism.md](parallelism.md).
+Record a shared edit surface under one repository ID. The checker conservatively compares paths case-insensitively. It does not inspect symlinks, actual diffs, Git state, tools, or external services, and does not enforce maximum concurrency at runtime. Its topological waves are a static scheduling preview; use [parallelism.md](parallelism.md) for execution.
 
 ## Handoff receipt
 
@@ -48,6 +54,6 @@ Reuse passing evidence when the relevant content, inputs, and environment remain
 
 A required criterion is `verified`, `failed`, `unverified`, or explicitly `deferred` by the user. A test outside authorization stays unverified; lack of permission does not create a waiver. Optional follow-up work need not block an otherwise complete bounded result.
 
-Independent review can inspect a stable completed package while unrelated implementation continues. A review package depends on the packages it actually reviews; add final integration review for combined contracts and interactions. Findings include practical impact and a location or reproduction where permitted. Resolve disagreements on the owning requirement and evidence, not by vote or agent seniority. The coordinator may reject unsupported suggestions with reasons; ask the user only for a material unresolved requirement, scope, authority, or risk-acceptance decision.
+Review findings include practical impact and a location or reproduction where permitted. Resolve disagreements on the owning requirement and evidence, not by vote or agent seniority. The coordinator may reject unsupported suggestions with reasons; ask the user only for a material unresolved requirement, scope, authority, or risk-acceptance decision.
 
-The plan checker returns `VALID_PLAN` or `INVALID_PLAN` for structure only. Readiness, review, implementation completion, merge, deployment, and acceptance remain separately evidenced decisions; there is no automatic end-to-end gate in this package.
+The plan checker returns `VALID_PLAN` or `INVALID_PLAN` for structure only. It does not validate profile selection, context, or actual native/inline application; inspect assignments under agent-profiles.md. Readiness, review, implementation completion, merge, deployment, and acceptance remain separately evidenced decisions; there is no automatic end-to-end gate in this package.

@@ -23,19 +23,21 @@ If you are a delegated specialist, complete your assigned package and return its
 
 For code, read [software.md](references/software.md). For research or drafting, read [research-writing.md](references/research-writing.md). Read only the relevant routes. [salta.md](references/salta.md) is a project-specific application, not a default for unrelated projects. [sources.md](references/sources.md) records the upstream basis and adaptation limits.
 
+Before executing work, use [agent-profiles.md](references/agent-profiles.md) to select and apply the relevant personal profile for each substantive action. It defines the action mapping, specialized requirements/modeling/delivery and preservation reviews, role-specific context, native profile selection, and explicit instruction fallback when the runtime cannot select stored profiles. Direct work applies the selected profile locally without manufacturing delegation.
+
 Interpret `$agent-team init <project and sources>`, `refresh`, `roadmap`, `start <step>`, and `resume` as natural-language skill requests, not installed CLI commands. `init` includes discovery and roadmap authoring; it does not itself start product implementation or publish issues. If the same request also authorizes execution, continue into ready work within that scope without inserting an extra planning approval round.
 
-Use the request and settled decisions to establish the observable outcome, owning artifacts, acceptance criteria, dependencies, and permissions. Resolve routine choices directly. Ask only when a missing answer materially changes correctness, scope, or authority, while continuing independent authorized work.
+Use the request and settled decisions to establish the observable outcome, owning artifacts, acceptance criteria, dependencies and permissions. Ground consequential choices in exact project sources. Ask the user before dependent work on a material unresolved choice and offer direct input or a user-chosen, authorized decision issue; [decisions.md](references/decisions.md) routes the shared procedure and coordinator responsibilities. Continue independent authorized work.
 
 ## Select capabilities and work packages
 
-Select engineering questions and relevant installed skills using routing.md; then choose who performs them. A skill, gate, or repository does not automatically require a separate agent. Keep contract decisions ahead of their consumers and concurrent write sets disjoint. One owner integrates shared files and the final result.
+Select engineering questions and relevant installed skills using routing.md; then choose who performs them. A skill, gate, or repository does not automatically require a separate agent.
 
-For substantive independent work, actively delegate ready packages rather than doing all discovery, implementation or review sequentially. Use [parallelism.md](references/parallelism.md) to maintain a bounded pool, refill free slots, and overlap work whose own prerequisites are satisfied. Keep short indivisible work direct.
+For substantive independent work, actively delegate ready packages. [parallelism.md](references/parallelism.md) owns scheduling, write ownership, concurrency limits, and independent review. Keep short indivisible work direct.
 
-For non-trivial multi-wave or cross-repository Team work, make the plan concrete using [plan.example.json](assets/plan.example.json). Run `python3 <skill-directory>/scripts/check_plan.py <plan.json>` before delegation. It statically checks declared dependencies, ownership, contracts, permissions, and review order; `VALID_PLAN` does not prove implementation, authorization, or runtime enforcement. Smaller runs may use the same fields in a concise brief.
+For non-trivial multi-wave or cross-repository software Team work, make the plan concrete using [plan.example.json](assets/plan.example.json). Run `python3 <skill-directory>/scripts/check_plan.py <plan.json>` before delegation. It statically checks declared dependencies, ownership, contracts, permissions, and review order; `VALID_PLAN` does not prove implementation, authorization, or runtime enforcement. Smaller software runs and research or writing work use a task brief with the applicable fields from [contracts.md](references/contracts.md); do not invent repositories to fit the checker.
 
-Delegate through native subagent tools with the [work-package template](templates/work-package.md). Use fresh context for independent review and self-contained subtasks. Include exact artifacts, decisions, ownership, authorization sources, and output expectations even when history is inherited. Wait for dependencies and inspect actual artifacts on receipt.
+Delegate through native subagent tools with the [work-package template](templates/work-package.md) and the selected profile applied as specified in agent-profiles.md. Include exact artifacts, decisions, ownership, authorization sources, and output expectations even when history is inherited.
 
 If native delegation is unavailable, report the limitation and proceed directly where possible. Do not implicitly substitute an SDK, extra Codex processes, or user-owned chats.
 
@@ -49,9 +51,9 @@ Track readiness, implementation, review, publication, merge, deployment, and acc
 
 ## Review, recover, and stop
 
-Obtain independent review of non-trivial Team deliverables. Review stable completed packages while unrelated work continues; retain final review of their integrated interactions. The reviewer did not author the result, inspects the criteria and primary artifacts, and reports `PASS`, `CHANGES_REQUIRED`, or `INCOMPLETE`, with concrete findings, evidence, and material limits. It does not silently edit. Direct work does not require another agent solely to satisfy a role diagram.
+Apply the independent-review requirements in [parallelism.md](references/parallelism.md) and the evidence rules in [contracts.md](references/contracts.md).
 
-Default bounds are six concurrent subagents excluding the coordinator, or the runtime's lower limit, delegation depth one, one recovery retry per failed package, and two correction cycles after the initial review. Six is a ceiling, not a target to fill. These are workflow defaults and may be adjusted explicitly for a task. Preserve useful work before recovery; follow recovery.md rather than resetting or discarding work automatically.
+Use [recovery.md](references/recovery.md) for retry and correction bounds. These bound repeated unsuccessful approaches, not the whole assignment; continue a supported alternative within the existing scope and authority when useful progress remains possible.
 
 Inherit current model and reasoning settings unless the user or applicable instructions request overrides. Keep current global configuration intact. Use actual runtime controls for supplied budgets, record observed usage only, and disclose when a strict cost or time cap cannot be enforced. Reviewer read-only instructions and write ownership are behavioral constraints; subagents inherit the parent permissions.
 

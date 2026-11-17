@@ -1,60 +1,50 @@
-# CONTEXT.md Format
+# Glossary Format
+
+Use the repository's existing glossary paths and format first. This is a lightweight default when glossary writing is within scope; it does not authorize creating or editing files.
 
 ## Structure
 
 ```md
 # {Context Name}
 
-{One or two sentence description of what this context is and why it exists.}
+{One or two sentences describing the context and its scope.}
 
 ## Language
 
 **Order**:
-{A one or two sentence description of the term}
-_Avoid_: Purchase, transaction
+{One or two sentences defining the agreed meaning in this context.}
 
 **Invoice**:
 A request for payment sent to a customer after delivery.
-_Avoid_: Bill, payment request
-
-**Customer**:
-A person or organization that places orders.
-_Avoid_: Client, buyer, account
 ```
 
-## Rules
+Use examples only when their definitions match accepted project sources. Add an `_Avoid_` line only for wording that is agreed to be misleading in this context; do not assume other domain words are interchangeable or globally forbidden.
 
-- **Be opinionated.** When multiple words exist for the same concept, pick the best one and list the others under `_Avoid_`.
-- **Keep definitions tight.** One or two sentences max. Define what it IS, not what it does.
-- **Only include terms specific to this project's context.** General programming concepts (timeouts, error types, utility patterns) don't belong even if the project uses them extensively. Before adding a term, ask: is this a concept unique to this context, or a general programming concept? Only the former belongs.
-- **Group terms under subheadings** when natural clusters emerge. If all terms belong to a single cohesive area, a flat list is fine.
+## Definitions
 
-## Single vs multi-context repos
+- Keep definitions short and focused on domain meaning. Include a distinction or boundary when necessary to distinguish concepts.
+- Include concepts relevant to the project's domain, even if other domains also use them. General programming concepts belong elsewhere unless they have a specific domain meaning here.
+- Preserve context-specific meanings and accepted terminology. Ground changes in source context; label unsettled alternatives outside the agreed glossary.
+- Group terms under subheadings when that improves readability. A flat list is sufficient for a small glossary.
+- Keep schemas, API field mappings, workflows and implementation decisions in the owning model, specification or decision record. A glossary term does not rename canonical backend fields.
 
-**Single context (most repos):** One `CONTEXT.md` at the repo root.
+## Contexts and documentation paths
 
-**Multiple contexts:** A `CONTEXT-MAP.md` at the repo root lists the contexts, where they live, and how they relate to each other:
+Inspect existing models, glossaries, ownership and current usage before selecting a location. `CONTEXT.md` and `CONTEXT-MAP.md` are conventions, not evidence of domain boundaries. A missing map or a single root file does not establish a single context; folders do not automatically define separate contexts.
+
+For a confirmed single context without existing conventions, a root `CONTEXT.md` can suffice. When multiple contexts are established and a map is useful, keep it short and link their authoritative documentation. For example:
 
 ```md
 # Context Map
 
 ## Contexts
 
-- [Ordering](./src/ordering/CONTEXT.md) — receives and tracks customer orders
-- [Billing](./src/billing/CONTEXT.md) — generates invoices and processes payments
-- [Fulfillment](./src/fulfillment/CONTEXT.md) — manages warehouse picking and shipping
+- [Ordering](./src/ordering/CONTEXT.md) — agreed ordering terminology
+- [Billing](./src/billing/CONTEXT.md) — agreed billing terminology
 
 ## Relationships
 
-- **Ordering → Fulfillment**: Ordering emits `OrderPlaced` events; Fulfillment consumes them to start picking
-- **Fulfillment → Billing**: Fulfillment emits `ShipmentDispatched` events; Billing consumes them to generate invoices
-- **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
+{Source-backed ownership and dependencies between these contexts.}
 ```
 
-The skill infers which structure applies:
-
-- If `CONTEXT-MAP.md` exists, read it to find contexts
-- If only a root `CONTEXT.md` exists, single context
-- If neither exists, create a root `CONTEXT.md` lazily when the first term is resolved
-
-When multiple contexts exist, infer which one the current topic relates to. If unclear, ask.
+Paths are illustrative. Describe actual relationships without inferring events, shared types or transport choices from this layout. Ask only when an unresolved boundary materially affects the work. Create or extend documentation lazily within the authorized scope rather than generating a new context hierarchy.

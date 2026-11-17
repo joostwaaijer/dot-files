@@ -1,47 +1,35 @@
 # ADR Format
 
-ADRs live in `docs/adr/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc.
+Follow the repository's decision-record conventions. When none exist, `docs/adr/0001-slug.md` is a possible default. Create directories and records lazily within authorized documentation scope; otherwise propose the record.
 
-Create the `docs/adr/` directory lazily — only when the first ADR is needed.
+## When a record helps
 
-## Template
+Offer an ADR when future work benefits from preserving a consequential decision and its rationale. Consider reversal cost, reasoning that is not evident from code, and meaningful trade-offs. These are judgment factors, not three mandatory conditions. Follow applicable project requirements for decision records.
+
+Ownership, context boundaries or data/API compatibility can warrant a durable record even when the technical change is reversible. Reference an existing model or decision if it already captures the rationale. Routine mechanics and every clarified term do not need an ADR.
+
+## Compact default
 
 ```md
-# {Short title of the decision}
+# {Short title}
 
-{1-3 sentences: what's the context, what did we decide, and why.}
+{Status: proposed or accepted. Context, decision or proposal, rationale,
+and a link to the accepted source or the unresolved decision question.}
 ```
 
-That's it. An ADR can be a single paragraph. The value is in recording *that* a decision was made and *why* — not in filling out sections.
+A paragraph can suffice. Make it clear whether the choice is proposed or accepted and what evidence supports that status; an agent recommendation is not acceptance. Use the project's status/date conventions, or state this in prose without introducing a metadata schema. Record material consequences and contract implications where relevant, in the paragraph or a short section.
 
-## Optional sections
+Add sections only when useful:
 
-Only include these when they add genuine value. Most ADRs won't need them.
+- **Sources:** exact issue, specification, design or user-decision references supporting the choice.
+- **Considered options:** meaningful alternatives and why the selected option fits the source-backed constraints.
+- **Consequences:** non-obvious effects, affected owners/consumers and compatibility or rollout dependencies.
+- **Open questions:** unresolved choices and any decision issue, kept distinct from accepted parts.
 
-- **Status** frontmatter (`proposed | accepted | deprecated | superseded by ADR-NNNN`) — useful when decisions are revisited
-- **Considered Options** — only when the rejected alternatives are worth remembering
-- **Consequences** — only when non-obvious downstream effects need to be called out
+Do not invent alternatives to fill a template. If a required choice remains open, follow the skill's user-input route; recording a proposal or linking a closed issue does not settle it.
 
-## Numbering
+## Numbering and revisions
 
-Scan `docs/adr/` for the highest existing number and increment by one.
+Use existing naming and numbering. For a sequential default, inspect records in the relevant scope and increment the highest existing number; check for a collision before writing. Do not renumber history.
 
-## When to offer an ADR
-
-All three of these must be true:
-
-1. **Hard to reverse** — the cost of changing your mind later is meaningful
-2. **Surprising without context** — a future reader will look at the code and wonder "why on earth did they do it this way?"
-3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons
-
-If a decision is easy to reverse, skip it — you'll just reverse it. If it's not surprising, nobody will wonder why. If there was no real alternative, there's nothing to record beyond "we did the obvious thing."
-
-### What qualifies
-
-- **Architectural shape.** "We're using a monorepo." "The write model is event-sourced, the read model is projected into Postgres."
-- **Integration patterns between contexts.** "Ordering and Billing communicate via domain events, not synchronous HTTP."
-- **Technology choices that carry lock-in.** Database, message bus, auth provider, deployment target. Not every library — just the ones that would take a quarter to swap out.
-- **Boundary and scope decisions.** "Customer data is owned by the Customer context; other contexts reference it by ID only." The explicit no-s are as valuable as the yes-s.
-- **Deliberate deviations from the obvious path.** "We're using manual SQL instead of an ORM because X." Anything where a reasonable reader would assume the opposite. These stop the next engineer from "fixing" something that was deliberate.
-- **Constraints not visible in the code.** "We can't use AWS because of compliance requirements." "Response times must be under 200ms because of the partner API contract."
-- **Rejected alternatives when the rejection is non-obvious.** If you considered GraphQL and picked REST for subtle reasons, record it — otherwise someone will suggest GraphQL again in six months.
+When an accepted decision changes, preserve the earlier rationale and link the replacing decision using the repository's superseding convention. Correcting a typo or source link need not create another ADR. Explain changed requirements or evidence and the practical consequences rather than silently rewriting history as if the new choice had always applied.

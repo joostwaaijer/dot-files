@@ -4,6 +4,12 @@ set -eu
 REPO_DIR=${ROBUUST_AGENTS_DIR:-/Users/joostwaaijer/Documents/workspace/robuust-agents}
 AGENT_HOME=${AGENT_HOME:-${CODEX_HOME:-"$HOME/.codex"}}
 
+# Preserve the personal repository's physical copies and local Git settings.
+if [ -d "$AGENT_HOME/git-instructions" ] && [ ! -L "$AGENT_HOME/git-instructions" ]; then
+    printf 'Skipped synchronization: skills and Git instructions are maintained as local copies.\n'
+    exit 0
+fi
+
 cd "$REPO_DIR"
 
 current_branch=$(git branch --show-current)

@@ -20,6 +20,8 @@ Status distinguishes confirmed requirement, proposed behavior, observed existing
 | Subject | Dependency or conflicting sources | Practical impact | Resolution/evidence or next owner |
 | --- | --- | --- | --- |
 
+For an unresolved choice, record the exact missing decision, source evidence and limits, affected work, and pending user input or the user-chosen project-manager issue. Keep any suggested solution labeled as a proposal until an authoritative answer resolves it.
+
 ## Explicit exclusions and deferred work
 
 | Capability/source item | Decision and source | Reason | Revisit trigger, if known |

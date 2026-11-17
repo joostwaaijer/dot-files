@@ -33,4 +33,4 @@
 
 # Temporary Test Containers
 
-- For authorized test runs that create temporary Docker resources, read and apply the [Temporary Test Containers](</Users/joostwaaijer/Documents/workspace/robuust-agents/agents/templates/org/AGENTS.md#temporary-test-containers>) section. Use that section for cleanup of run-owned containers, volumes, and networks; preserve this file's existing authorization rules.
+- For authorized test runs that create temporary Docker resources, read and apply the [Temporary Test Containers](agents/templates/org/AGENTS.md#temporary-test-containers) section. Use that section for cleanup of run-owned containers, volumes, and networks; preserve this file's existing authorization rules.

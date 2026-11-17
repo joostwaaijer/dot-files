@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Address Feedback"
+  short_description: "Evaluate PR feedback and prepare justified local fixes"
+  default_prompt: "Use $github-address-feedback to evaluate this PR feedback and prepare local fixes without committing or pushing."

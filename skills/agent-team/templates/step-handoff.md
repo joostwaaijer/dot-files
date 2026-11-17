@@ -17,14 +17,17 @@ In scope, out of scope, and complete-when criteria:
 - Relevant Balsamiq screens, Figma nodes, issue/card references and source versions:
 - Domain glossary/model, owning data/API contracts, and affected unresolved decisions:
 - Settled decisions and material unknowns:
+- Decision rationale with exact wireframe/design/issue or accepted-contract references; pending user questions or project-manager decision issues and the work they block:
 - Repositories, branch/worktree, expected base revisions and existing local changes:
 - Who owns each checkout during this task:
 - Prerequisite PRs and confirmed merge evidence:
 - Required producer/consumer contract and rollout order:
+- Intended changes versus preserved functionality/frontend structure; exact comparison baseline and affected existing consumers:
 
 ## Execution and verification
 
 - Applicable rules and required skill paths:
+- Route each substantive action using [agent-profiles.md](/Users/joostwaaijer/.codex/skills/agent-team/references/agent-profiles.md); carry the selected profile, native/inline/direct application, and scoped context into each work package:
 - Authorized implementation scope:
 - Exact test authorization and its source, separated by project/test family:
 - Permitted static, build and direct-inspection checks:

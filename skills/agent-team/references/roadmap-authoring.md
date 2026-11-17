@@ -8,7 +8,7 @@ Group work by observable user or operational outcome, not solely by screen, tech
 
 Distinguish work that is already implemented with evidence, partly implemented, planned, explicitly deferred or outside scope. Map every in-scope requirement to one owning delivery step and any supporting prerequisites. Preserve tracker IDs; do not duplicate the same feature as separate wireframe, Figma and issue tasks.
 
-Where uncertainty could invalidate later work, first resolve it by inspection. If inspection cannot answer it, plan the smallest useful modeling decision, prototype or feasibility investigation with an observable question and stopping condition. A research task is not application implementation.
+Where uncertainty could invalidate later work, first inspect the relevant source context. If it leaves a product, design, model or contract choice unresolved, follow [decisions.md](decisions.md): ask the user for input or their choice to raise a decision issue with the project manager, and block the dependent steps. For a technical feasibility unknown within an established outcome, plan the smallest useful investigation with an observable question and stopping condition. A prototype or investigation does not settle an unsupported product choice or authorize application implementation.
 
 ## Describe each step
 

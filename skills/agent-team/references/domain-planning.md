@@ -13,7 +13,7 @@ Trace actor journeys, wireframe/design data needs, issues and current code into:
 - Relevant lifecycle/state transitions, historical records and deletion/retention decisions where specified.
 - Producer/consumer boundaries, external integrations, import/export contracts and ownership.
 
-Use concrete scenarios to expose ambiguous terms and relationships. Resolve what the code or accepted sources can answer; ask for a material product/policy choice when different answers change correctness or scope. Do not invent a retention period, permission matrix, collaboration rule, billing engine or tenant boundary because a screen needs data.
+Use concrete scenarios to expose ambiguous terms and relationships. Explain each modeling choice from the relevant source context under [decisions.md](decisions.md). Code establishes current behavior, not the answer to an unresolved product/policy choice. Ask for user input when accepted sources do not determine the answer, with the option to create a decision issue for the project manager. Do not invent a retention period, permission matrix, collaboration rule, billing engine or tenant boundary because a screen needs data.
 
 ## Separate the model's levels
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "GitHub Submit for Review"
+  short_description: "Release notes, PR reviewers, labels, and auto-merge"

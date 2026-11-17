@@ -1,6 +1,6 @@
 # Adaptive routing and readiness
 
-Choose the engineering questions before assigning agents. This adapts L-GEVITY's separation between method, orchestration, and runtime to the user's installed skills and authorization model.
+Choose the engineering questions before assigning agents. This adapts L-GEVITY's separation between method, orchestration, and runtime to the user's installed skills and authorization model. Apply the action-to-profile mapping in [agent-profiles.md](agent-profiles.md) after selecting the capability; it owns profile selection and context loading.
 
 Respect explicit user choices about delegation and review. Scaling the analysis does not cancel a requested execution mode.
 
@@ -25,7 +25,7 @@ For adaptive work, consider these questions in dependency order:
 6. **Enforcement and verification:** Which existing check can detect the relevant failure earliest? A proposed test strategy does not authorize test work.
 7. **Delivery and measurement:** What is needed for publication, merge, rollout, and acceptance? Optimize only against an actual baseline or known bottleneck.
 
-`READY` means the bounded work can start. `PARTLY_READY` means independent work can proceed while a named prerequisite remains unresolved. `NOT_READY` blocks dependent work. None means implemented or verified. Do not turn every uncertain architecture choice into a user approval gate.
+`READY` means the bounded work can start. `PARTLY_READY` means independent work can proceed while a named prerequisite remains unresolved. `NOT_READY` blocks dependent work. None means implemented or verified. Apply [decisions.md](decisions.md): an unresolved choice about the outcome or contract needs user input or project-manager escalation, while implementation mechanics preserving the established outcome can follow supported code/API conventions.
 
 ## Compose capabilities from available skills
 
@@ -33,24 +33,22 @@ Discover relevant skills from the current catalog; do not assume L-GEVITY's enti
 
 | Capability | Suitable existing guidance when available | Output |
 | --- | --- | --- |
-| Requirements and slicing | Domain modeling, project specifications, readiness guidance | Outcome, acceptance references, dependencies, smallest coherent step. |
-| Architecture | Codebase design and framework guidance | Ownership decisions and producer/consumer contracts. |
+| Functional requirements | Project sources, specifications and discovery guidance | Source-backed journeys and acceptance criteria; unresolved choices and preserved behavior. |
+| Domain and data semantics | Domain modeling, current glossary/model and producer/consumer evidence | Canonical terms, rules, relationships and data/API semantics. |
+| Architecture and slicing | Codebase design, framework and roadmap guidance | Technical ownership, dependencies and the smallest coherent sequence from accepted requirements/contracts. |
 | Exploration | Code search, diagnostics, primary documentation | Verified paths, APIs, constraints, and unresolved facts. |
 | Engineering | Matching stack and component skills | A bounded artifact within the assigned write set. |
 | Research and drafting | Research, source connectors, document or presentation skills | Evidence report or cited draft. |
 | Verification | Relevant review skill and permitted checks | Independent findings and criterion-level evidence. |
+| Functionality and frontend preservation | Regression-reviewer, exact baseline, agreed scope and affected consumers | Concrete unintended differences or a bounded preservation conclusion with verification limits. |
 | Delivery | Repository-specific PR workflow | Reviewable local work or an authorized publication result. |
 
-A capability is a responsibility for this task, not a permanent persona. One agent may cover several capabilities. Add specialized security, accessibility, infrastructure, or scientific review only when requested, required by the project, or justified by a concrete risk.
+A capability is a responsibility for this task. One profile may support several capabilities, and multiple independent owners may use the same profile. Keep an agent's reused context suitable for its role and retain reviewer independence under agent-profiles.md. Add specialized security, accessibility, infrastructure, or scientific review only when requested, required by the project, or justified by a concrete risk.
 
 ## Plan the schedule
 
-- Use [parallelism.md](parallelism.md) to schedule a dependency-driven ready queue within the effective runtime limit. Start useful independent packages together, then refill freed slots as accepted results satisfy their dependents. A static wave diagram is an overview, not a barrier that makes ready work wait for unrelated packages.
-- Put shared decisions and contract-producing work before consumers. Parallelize only work with no unresolved dependency and no overlapping writes.
-- A cross-repository feature may belong in one task chat so its producer/consumer contract has one owner. Splitting by repository alone can create incompatible interfaces.
-- Review a completed package independently while unrelated implementation continues when the review's own inputs are current and complete. Retain final integrated review for interactions and shared contracts; several independent review lenses may run together. Consolidate duplicate findings and resolve disagreements on evidence.
-- Parallel roadmap steps additionally need independent merge and rollout paths. An unmerged prerequisite prevents dependent execution even when file sets do not overlap.
+Use [parallelism.md](parallelism.md) for readiness, write ownership, scheduling, and independent review. A cross-repository feature may belong in one task chat so its producer/consumer contract has one owner. Splitting by repository alone can create incompatible interfaces.
 
-Pass accepted findings and exact source pointers forward. Specialists inspect their affected inputs and assumptions instead of repeating the coordinator's whole-project exploration. Keep tiny or indivisible tasks direct rather than creating agents solely to occupy slots.
+Parallel roadmap steps additionally need independent merge and rollout paths under [roadmap.md](roadmap.md). An unmerged prerequisite prevents dependent execution even when file sets do not overlap.
 
 Report the chosen route, work packages, owners, dependencies, and verification limits concisely when they materially affect the work. Do not force a fixed report format or every gate onto a routine task.

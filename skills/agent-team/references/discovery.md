@@ -43,7 +43,7 @@ Use [requirements.md](../templates/requirements.md) as a shape, not a requiremen
 
 Map each meaningful journey/capability to its screens/designs, issue/card, business rule, model/API owner and observable completion criteria. Label statements as confirmed requirements, observed current behavior, proposed design, inference, conflict or open question. Separate desired functionality from current implementation. Placeholder data, an ERD proposal, or a visual control does not by itself establish business policy or authorize a feature.
 
-Choose authority by the concern and explicit decisions, not a fixed ranking of tools or the newest timestamp. Wireframes may describe interaction, Figma may describe visual states, an issue may amend behavior, and a domain model may define data semantics. Record contradictions and their effect; ask only about material choices that the sources cannot resolve.
+Choose authority by the concern and explicit decisions, not a fixed ranking of tools or the newest timestamp. Wireframes may describe interaction, Figma may describe visual states, an issue may amend behavior, and a domain model may define data semantics. Apply [decisions.md](decisions.md) to trace each required choice to its evidence and ask for user input when the sources do not clearly resolve it; offer the project-manager issue route rather than filling a gap with an assumed solution.
 
 ## Establish the model and roadmap
 

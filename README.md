@@ -7,16 +7,24 @@ Personal Codex configuration. This repository's root maps directly to
 
 - `config.toml`: current settings, MCP configuration, and local project settings.
 - `AGENTS.md`: global agent instructions.
-- `skills/`: user-installed skills and links to shared skills.
+- `skills/`: user-installed skills maintained as physical local copies.
+- `agents/`: personal profiles and the supporting instruction references/template.
+- `references/robuust-agents/`: reference-only snapshots of related guidance;
+  these are not installed skills.
 - `rules/` and `bin/`: local rules and helper scripts.
 - `automations/*/automation.toml`: automation definitions.
-- `git-instructions`: link to the shared Git instructions.
+- `git-instructions/`: physical local copies of the Git formatting instructions.
 
-Shared skills and Git instructions remain symbolic links to
-`/Users/joostwaaijer/Documents/workspace/robuust-agents`. Clone that repository
-at the same location, or update those links when restoring on another machine.
+The former shared-skill and Git-instruction symlinks were replaced with physical
+copies of their current contents, including local customizations. Their source
+was `/Users/joostwaaijer/Documents/workspace/robuust-agents`; edit and version
+the copies in this repository from now on. Supporting policy references are
+local too. Conditional guidance for intentionally uninstalled skills stays in
+`references/robuust-agents/`, preserving those exclusions.
 The configuration also contains machine-specific absolute paths and references
-to separately installed applications, plugins, and MCP servers.
+to separately installed applications, plugins, and MCP servers. Craft rules MCP
+documentation and its fallback CLI still refer to the separately managed MCP
+installation; converting skills does not move or reconfigure that runtime.
 
 The local copies of `code-review`, `codebase-design`, `diagnosing-bugs`,
 `domain-modeling`, `research`, `resolving-merge-conflicts`, and
@@ -26,15 +34,13 @@ personal use. They are now maintained directly in `skills/`; their former
 `~/.agents/skills/` paths are no longer used. Original installation metadata
 is retained in `skills/upstream-sources.json`.
 
-The shared-skills automation runs `bin/sync-robuust-skills`. Synchronization
-requires a clean checkout already on `main`; otherwise it skips the run and
-reports the reason. It also updates the desktop commit and pull request
-instructions from the shared `agents/git/` Markdown files, preserving other
-configuration settings. Its exclusion list
-keeps intentionally removed skills from being linked again. Update that list
-when changing which shared skills should stay uninstalled. Use this local
-script for synchronization; the shared repository's `scripts/sync-local.sh`
-links every shared skill and overwrites the local `AGENTS.md`.
+The existing shared-skills automation calls `bin/sync-robuust-skills`. The script
+now skips synchronization while `git-instructions/` is a physical local directory,
+before pulling upstream, updating desktop Git settings or creating symlinks.
+It leaves local copies and the existing Codex configuration intact. Review and
+apply any future upstream updates manually. Do not use the shared repository's
+`scripts/sync-local.sh` for this personal setup: it links shared skills and
+overwrites the local `AGENTS.md`.
 
 ## Excluded files
 
