@@ -36,13 +36,19 @@ personal use. They are now maintained directly in `skills/`; their former
 `~/.agents/skills/` paths are no longer used. Original installation metadata
 is retained in `skills/upstream-sources.json`.
 
-The existing shared-skills automation calls `bin/sync-robuust-skills`. The script
-now skips synchronization while `git-instructions/` is a physical local directory,
-before pulling upstream, updating desktop Git settings or creating symlinks.
-It leaves local copies and the existing Codex configuration intact. Review and
-apply any future upstream updates manually. Do not use the shared repository's
-`scripts/sync-local.sh` for this personal setup: it links shared skills and
-overwrites the local `AGENTS.md`.
+The scheduled **Review Robuust agent updates** task replaces the former sync task.
+It fetches upstream history, compares new logical changes with the personal
+versions, and proposes adoption, adaptation or skipping each change. Every
+proposal keeps an individual user decision; scheduled runs never apply changes,
+run tests or publish work. The operational checkpoint and proposal ledger live
+in `automations/sync-robuust-shared-skills/review-state.json`, outside version
+control. The initial baseline is the imported upstream revision, not the full
+permanent difference between the upstream and personal repositories.
+
+The legacy `bin/sync-robuust-skills` script skips synchronization while
+`git-instructions/` is a physical local directory; the review task does not call
+it. Do not use the shared repository's `scripts/sync-local.sh` for this personal
+setup: it links shared skills and overwrites the local `AGENTS.md`.
 
 ## Excluded files
 
