@@ -75,6 +75,11 @@ repository is private.
 
 ## Manage changes
 
+Validate selected personal skills with `bin/validate-skills <skill-directories...>`.
+See [Skill mechanics](skills/writing-for-agents/SKILL-MECHANICS.md#validation-and-tool-limits)
+for requirements, checks and limitations. This command performs static validation;
+it does not run behavioral skill evaluations or modify the selected skills.
+
 ```sh
 git -C ~/.codex status --short
 git -C ~/.codex diff

@@ -22,6 +22,16 @@ Shared reference material can be a plain linked file. Separate skills are useful
 
 Validate frontmatter, metadata, local links/anchors and the final diff against the actual managed source and target environment. Check both the modified entrypoint and affected callers/references; avoid expanding a small edit into an unrelated repository audit.
 
+For personal skills, use [bin/validate-skills](../../bin/validate-skills) with the relevant directories:
+
+```sh
+~/.codex/bin/validate-skills ~/.codex/skills/research ~/.codex/skills/writing-for-agents
+```
+
+The command uses `uv` and pinned PyYAML in an isolated script environment; initial dependency setup may require network access. It reuses the installed skill-creator frontmatter validator and checks optional UI/invocation metadata, local inline Markdown links and ATX heading fragments, and applicable adaptation records in `skills/upstream-sources.json`. It is read-only, requires at least one explicit directory, and returns nonzero on errors. Keep the managed `.system` validator unchanged.
+
+Reference-style links, full Markdown rendering, non-Markdown fragments and the complete runtime metadata schema are outside this command's coverage. Inspect those manually when relevant, and compare the diff for preserved policies.
+
 When a validator rejects a field such as an existing `compatibility` key, inspect its schema/allowlist and the target harness contract before deciding the artifact is wrong. Do not discard metadata or modify the validator merely to obtain a pass, and do not assume every failure is a tool defect. Use a suitable validator when available; otherwise perform focused YAML/type/required-field, reference and metadata-preservation checks. Retain unverified compatibility as a stated limitation rather than claiming target support or a successful standard validation.
 
 Report which validator/checks ran, what passed, and any unsupported schema or skipped check. Static checks establish structure and preservation evidence, not runtime invocation or behavioral quality. Run behavioral evaluations only when authorized, following the entrypoint's evaluation limits; do not create test scripts or delegate an evaluation merely because instructions changed.

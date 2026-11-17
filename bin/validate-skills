@@ -1,0 +1,175 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["PyYAML==6.0.3"]
+# ///
+"""Run read-only static checks on selected skill directories."""
+
+import argparse
+import html
+import importlib.util
+import json
+from pathlib import Path
+import re
+import sys
+from urllib.parse import unquote, urlsplit
+
+import yaml
+
+sys.dont_write_bytecode = True
+ROOT = Path(__file__).resolve().parent.parent
+LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(?:<([^>\n]+)>|([^\s)]+))(?:\s+"[^"\n]*")?\s*\)')
+
+
+def markdown_text(path):
+    """Exclude YAML frontmatter and fenced examples from link inspection."""
+    text = path.read_text(encoding="utf-8")
+    text = re.sub(r"\A---\n.*?\n---\n", "", text, count=1, flags=re.S)
+    lines, fence = [], None
+    for line in text.splitlines():
+        marker = re.match(r"^\s*(`{3,}|~{3,})", line)
+        if marker:
+            run = marker[1]
+            if fence is None:
+                fence = run
+            elif run[0] == fence[0] and len(run) >= len(fence):
+                fence = None
+            continue
+        if fence is None:
+            lines.append(line)
+    return "\n".join(lines)
+
+
+def anchors(path):
+    text = markdown_text(path)
+    found = set(re.findall(r'\b(?:id|name)=["\']([^"\']+)["\']', text))
+    used = set(found)
+    for heading in re.findall(r"^ {0,3}#{1,6}\s+(.+?)\s*#*\s*$", text, flags=re.M):
+        heading = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", heading)
+        heading = html.unescape(re.sub(r"<[^>]+>", "", heading)).lower()
+        slug = re.sub(r"[^\w\- ]", "", heading).replace(" ", "-")
+        candidate, suffix = slug, 0
+        while candidate in used:
+            suffix += 1
+            candidate = f"{slug}-{suffix}"
+        used.add(candidate)
+        found.add(candidate)
+    return found
+
+
+def check_links(folder):
+    errors, count = [], 0
+    for document in sorted(folder.rglob("*.md")):
+        text = re.sub(r"(`+).*?\1", "", markdown_text(document))
+        for match in LINK.finditer(text):
+            target = match[1] or match[2]
+            url = urlsplit(target)
+            if url.scheme or url.netloc:
+                continue
+            destination = (document.parent / unquote(url.path)).resolve() if url.path else document
+            count += 1
+            if not destination.exists():
+                errors.append(f"{document.name}: missing local target {target}")
+            elif url.fragment and destination.suffix.lower() == ".md":
+                if unquote(url.fragment) not in anchors(destination):
+                    errors.append(f"{document.name}: missing Markdown anchor {target}")
+    return errors, count
+
+
+def check_metadata(folder):
+    path = folder / "agents/openai.yaml"
+    if not path.exists():
+        return []
+    metadata = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(metadata, dict):
+        return ["agents/openai.yaml must contain a mapping"]
+    errors = []
+    interface = metadata.get("interface", {})
+    if not isinstance(interface, dict):
+        errors.append("interface must be a mapping")
+    else:
+        for key in ("display_name", "short_description", "default_prompt", "icon_small", "icon_large", "brand_color"):
+            if key in interface and not isinstance(interface[key], str):
+                errors.append(f"interface.{key} must be a string")
+        short = interface.get("short_description")
+        if isinstance(short, str) and not 25 <= len(short) <= 64:
+            errors.append("interface.short_description must contain 25–64 characters")
+        prompt = interface.get("default_prompt")
+        if isinstance(prompt, str) and f"${folder.name}" not in prompt:
+            errors.append(f"interface.default_prompt must mention ${folder.name}")
+        for key in ("icon_small", "icon_large"):
+            icon = interface.get(key)
+            if isinstance(icon, str) and not (folder / icon).is_file():
+                errors.append(f"interface.{key} points to a missing file")
+    policy = metadata.get("policy", {})
+    if not isinstance(policy, dict):
+        errors.append("policy must be a mapping")
+    elif "allow_implicit_invocation" in policy and type(policy["allow_implicit_invocation"]) is not bool:
+        errors.append("policy.allow_implicit_invocation must be a boolean")
+    return errors
+
+
+def check_provenance(folder, manifest):
+    errors = []
+    for adoption in manifest.get("adaptations", []):
+        base = ROOT / adoption["localPathsRelativeTo"]
+        for name, entry in adoption["skills"].items():
+            if (base / name).resolve() != folder:
+                continue
+            if not re.fullmatch(r"[0-9a-f]{40}", adoption["reviewedCommit"]):
+                errors.append("provenance reviewedCommit must be a full commit SHA")
+            if not (base / adoption["licensePath"]).is_file():
+                errors.append("provenance licensePath points to a missing file")
+            for path in entry["localPaths"]:
+                if not (base / path).is_file():
+                    errors.append(f"provenance points to a missing file: {path}")
+    return errors
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("skills", nargs="+", type=Path, help="Skill directories, relative to the current directory or absolute")
+    args = parser.parse_args()
+    validator_path = ROOT / "skills/.system/skill-creator/scripts/quick_validate.py"
+    try:
+        spec = importlib.util.spec_from_file_location("skill_creator_validator", validator_path)
+        validator = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(validator)
+        manifest_path = ROOT / "skills/upstream-sources.json"
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+        if not isinstance(manifest, dict):
+            raise ValueError("upstream-sources.json must contain an object")
+    except (OSError, ValueError, ImportError) as error:
+        parser.exit(2, f"Validation setup failed: {error}\n")
+
+    failed = 0
+    for path in dict.fromkeys(args.skills):
+        folder = path.expanduser().resolve()
+        try:
+            valid, message = validator.validate_skill(folder)
+            errors = [] if valid else [message]
+            if (folder / "SKILL.md").is_file():
+                errors.extend(check_metadata(folder))
+                link_errors, count = check_links(folder)
+                errors.extend(link_errors)
+                errors.extend(check_provenance(folder, manifest))
+                if valid:
+                    match = re.match(r"^---\n(.*?)\n---", (folder / "SKILL.md").read_text(encoding="utf-8"), re.S)
+                    if yaml.safe_load(match[1])["name"] != folder.name:
+                        errors.append("frontmatter name must match the skill directory")
+            else:
+                count = 0
+        except (OSError, ValueError, KeyError, TypeError, AttributeError, yaml.YAMLError) as error:
+            errors, count = [str(error)], 0
+        if errors:
+            failed += 1
+            print(f"FAIL {folder}")
+            for error in errors:
+                print(f"  {error}")
+        else:
+            print(f"PASS {folder} ({count} local links checked)")
+    return 1 if failed else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

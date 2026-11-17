@@ -15,6 +15,12 @@ Use **primary sources**: official documentation, source code, specifications and
 
 Check relevant dates, versions, environment and revision; verify changeable facts against their current owner. For code/API questions, distinguish declared, locked and installed versions and record the inspected commit/local content basis. Use matching official documentation or installed/release-tagged source. Report material mismatches/access gaps and refresh invalidated evidence.
 
+## Keep tool output focused
+
+Keep full source results available within the tool session when supported, without creating files for a read-only request. Unpack response envelopes before displaying them: show the relevant content once with its source path or URL and revision, rather than printing duplicate content fields and metadata. Retain pagination, errors and other metadata that affect coverage or interpretation.
+
+Inventory a large collection first, then inspect its contents in batches small enough to read completely. If output is truncated, display the missing portions from the retained result, or fetch them specifically when retention is unavailable; do not treat an unseen remainder as inspected. Reduce displayed volume rather than the requested research scope. Preserve contrary evidence and source attribution when selecting excerpts.
+
 ## Assess what the evidence establishes
 
 Cite material factual claims near their text using exact URLs or local/document paths and relevant sections, symbols or revisions/dates. Distinguish requirements, documented behavior, inspected code, executed reproduction/measurement, inference and recommendation. Static inspection does not establish runtime behavior. Never invent citations, measurements or successful checks.
