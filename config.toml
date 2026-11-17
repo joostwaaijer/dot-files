@@ -3,6 +3,7 @@ model_reasoning_effort = "high"
 sandbox_mode = "danger-full-access"
 notify = ["/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 service_tier = "default"
+model_reasoning_summary = "detailed"
 
 [projects."/Users/joostwaaijer/Documents/workspace/haarhuis-portaal"]
 trust_level = "trusted"
@@ -157,6 +158,7 @@ git-pr-instructions = "- Before creating or updating a pull request, find the re
 git-pr-watch-auto-merge = true
 enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "persistent", "max"]
 migratedFollowUpQueueToSteer = true
+default-workspace-full-view = true
 
 [shell_environment_policy.set]
 NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "9230e2bd8b24b7ac7a0ba6774c64bf0d78ecdabbdd91d0ed627b02a587bae2df"
