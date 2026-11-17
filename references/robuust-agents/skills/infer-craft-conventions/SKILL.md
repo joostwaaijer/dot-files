@@ -9,7 +9,7 @@ Document reality, never an aspirational standard. Complete the requested analysi
 
 ## 1. Orient
 
-Call `list-rules` through the [`craft_twig_rules` MCP](/Users/joostwaaijer/Documents/workspace/robuust-agents/mcp/craft-twig-rules/README.md). Inspect manifests, relevant tooling configuration, and paths for the requested dimensions; map the whole project only for a repository-wide convention audit. Reading test configuration is evidence gathering, not permission to run tests. Do not read `.ai/rules` directly. Existing returned rules mark their dimension as `already-recorded`.
+Call `list-rules` through the [`craft_twig_rules` MCP](../../../../mcp/craft-twig-rules/README.md). Inspect manifests, relevant tooling configuration, and paths for the requested dimensions; map the whole project only for a repository-wide convention audit. Reading test configuration is evidence gathering, not permission to run tests. Do not read `.ai/rules` directly. Existing returned rules mark their dimension as `already-recorded`.
 
 ## 2. Sweep
 

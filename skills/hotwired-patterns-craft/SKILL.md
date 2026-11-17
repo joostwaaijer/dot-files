@@ -5,9 +5,9 @@ description: Use when choosing or implementing Turbo Frames, Turbo Streams, and 
 
 # Hotwired for Craft/Twig
 
-Load project-local rules through the [`craft_twig_rules` MCP](/Users/joostwaaijer/Documents/workspace/robuust-agents/mcp/craft-twig-rules/README.md): call `find-rules` for known target paths, or `list-rules` for repository-wide work or unknown targets, before acting on them. Reuse unchanged results for already-inspected paths; look up new paths as scope grows. Apply returned rules within their scope, subject to explicit user instructions. Do not read `.ai/rules` directly.
+Load project-local rules through the [`craft_twig_rules` MCP](../../mcp/craft-twig-rules/README.md): call `find-rules` for known target paths, or `list-rules` for repository-wide work or unknown targets, before acting on them. Reuse unchanged results for already-inspected paths; look up new paths as scope grows. Apply returned rules within their scope, subject to explicit user instructions. Do not read `.ai/rules` directly.
 
-If the MCP is unavailable, report the missing rule access and defer work that requires rules not yet retrieved. Reuse still-current retrieved rules and continue independent authorized work; unavailability does not waive rule lookup or permit direct rule-file access. For Craft documentation questions, the existing [search CLI](/Users/joostwaaijer/Documents/workspace/robuust-agents/mcp/craft-twig-rules/bin/search-craft-docs.mjs) is a fallback only when its documentation track matches the project version.
+If the MCP is unavailable, report the missing rule access and defer work that requires rules not yet retrieved. Reuse still-current retrieved rules and continue independent authorized work; unavailability does not waive rule lookup or permit direct rule-file access. For Craft documentation questions, the existing [search CLI](../../mcp/craft-twig-rules/bin/search-craft-docs.mjs) is a fallback only when its documentation track matches the project version.
 
 ## Evidence and versions
 

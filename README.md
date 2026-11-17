@@ -14,6 +14,8 @@ Personal Codex configuration. This repository's root maps directly to
 - `rules/` and `bin/`: local rules and helper scripts.
 - `automations/*/automation.toml`: automation definitions.
 - `git-instructions/`: physical local copies of the Git formatting instructions.
+- `mcp/craft-twig-rules/`: local Craft/Twig rules MCP, documentation CLI and
+  original tests. It requires Node.js 20 or newer and no npm dependencies.
 
 The former shared-skill and Git-instruction symlinks were replaced with physical
 copies of their current contents, including local customizations. Their source
@@ -21,10 +23,10 @@ was `/Users/joostwaaijer/Documents/workspace/robuust-agents`; edit and version
 the copies in this repository from now on. Supporting policy references are
 local too. Conditional guidance for intentionally uninstalled skills stays in
 `references/robuust-agents/`, preserving those exclusions.
-The configuration also contains machine-specific absolute paths and references
-to separately installed applications, plugins, and MCP servers. Craft rules MCP
-documentation and its fallback CLI still refer to the separately managed MCP
-installation; converting skills does not move or reconfigure that runtime.
+The Craft rules MCP and its fallback CLI are maintained in this repository too;
+skill links and the `craft_twig_rules` configuration use this local copy. The
+configuration still contains machine-specific absolute paths and references
+to other separately installed applications, plugins, and MCP servers.
 
 The local copies of `code-review`, `codebase-design`, `diagnosing-bugs`,
 `domain-modeling`, `research`, `resolving-merge-conflicts`, and

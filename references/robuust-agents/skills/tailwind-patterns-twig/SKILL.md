@@ -5,7 +5,7 @@ description: Use for Tailwind and CSS architecture in Twig-based projects.
 
 # Tailwind/CSS for Twig
 
-Load project-local rules through the [`craft_twig_rules` MCP](/Users/joostwaaijer/Documents/workspace/robuust-agents/mcp/craft-twig-rules/README.md): call `find-rules` for known target paths, or `list-rules` for repository-wide work or unknown targets, before acting on them. Reuse unchanged results for already-inspected paths; look up new paths as scope grows. Apply returned rules within their scope, subject to explicit user instructions. Do not read `.ai/rules` directly.
+Load project-local rules through the [`craft_twig_rules` MCP](../../../../mcp/craft-twig-rules/README.md): call `find-rules` for known target paths, or `list-rules` for repository-wide work or unknown targets, before acting on them. Reuse unchanged results for already-inspected paths; look up new paths as scope grows. Apply returned rules within their scope, subject to explicit user instructions. Do not read `.ai/rules` directly.
 
 For a concrete Tailwind v4 syntax or recommendation question, call `search-tailwind-docs` through the `craft_twig_rules` MCP with the project root and a targeted query. Use its commit-pinned official documentation excerpts as framework evidence; do not turn documentation defaults into project conventions.
 

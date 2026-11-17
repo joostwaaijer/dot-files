@@ -24,6 +24,10 @@
 !/agents/templates/org/AGENTS.md
 !/git-instructions
 !/git-instructions/**
+!/mcp/
+/mcp/*
+!/mcp/craft-twig-rules/
+!/mcp/craft-twig-rules/**
 !/references/
 /references/*
 !/references/robuust-agents/

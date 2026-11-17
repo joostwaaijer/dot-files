@@ -114,6 +114,10 @@ NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/joostwaaijer/.codex/plugins/cac
 SKY_CUA_SERVICE_PATH = "/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex-cli/CodexCLI.app/Contents/MacOS/codex"
 
+[mcp_servers.craft_twig_rules]
+command = "/Users/joostwaaijer/.nvm/versions/node/v24.15.0/bin/node"
+args = ["/Users/joostwaaijer/.codex/mcp/craft-twig-rules/bin/mcp.mjs"]
+
 [marketplaces.openai-bundled]
 source_type = "local"
 source = "/Users/joostwaaijer/.codex/.tmp/bundled-marketplaces/openai-bundled"

@@ -1,0 +1,10 @@
+{
+  "name": "@robuust/craft-twig-rules",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "description": "Project rules and documentation lookup for Craft and Twig projects.",
+  "bin": { "craft-twig-rules-mcp": "./bin/mcp.mjs" },
+  "scripts": { "test": "node --test" },
+  "engines": { "node": ">=20" }
+}
