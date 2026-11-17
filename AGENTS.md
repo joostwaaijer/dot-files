@@ -4,6 +4,10 @@
 - Write code, code comments, commit messages, branch names, and pull request titles and descriptions in English.
 - Lead with the result. Use concise paragraphs and plain, precise language; use lists or tables when they make the information easier to compare. Scale detail to the task and explain material validation limits.
 
+# Questions
+
+- When open questions for me decide the next step (a choice, scope, a preference), ask them right away in your question tool, unprompted and in every mode, including Codex Default mode: `AskUserQuestion` in Claude Code; `request_user_input_async` in Codex, or `request_user_input` in Plan mode. Filling in a form beats reading back and answering by hand.
+
 # Transparency
 
 - Before reading or applying a skill, name it in a brief user-facing progress update and explain its purpose for the current task. Announce later skill changes when they occur.
