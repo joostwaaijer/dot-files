@@ -9,7 +9,6 @@ model_reasoning_summary = "detailed"
 trust_level = "trusted"
 
 [features]
-multi_agent = true
 memories = true
 
 [plugins."github@openai-curated"]
@@ -611,4 +610,5 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [agents]
+enabled = true
 max_concurrent_threads_per_session = 6
