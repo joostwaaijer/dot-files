@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import re
 import sys
+from tempfile import TemporaryDirectory
 from urllib.parse import unquote, urlsplit
 
 import yaml
@@ -19,6 +20,39 @@ import yaml
 sys.dont_write_bytecode = True
 ROOT = Path(__file__).resolve().parent.parent
 LINK = re.compile(r'!?\[[^\]\n]*\]\(\s*(?:<([^>\n]+)>|([^\s)]+))(?:\s+"[^"\n]*")?\s*\)')
+
+
+def check_frontmatter(folder, validator):
+    path = folder / "SKILL.md"
+    text = path.read_text(encoding="utf-8") if path.is_file() else ""
+    match = re.match(r"^---\n(.*?)\n---", text, re.S)
+    frontmatter = yaml.safe_load(match[1]) if match else None
+    errors = []
+    if isinstance(frontmatter, dict) and "compatibility" in frontmatter:
+        compatibility = frontmatter["compatibility"]
+        if not isinstance(compatibility, str):
+            errors.append("compatibility must be a string")
+        elif not compatibility.strip() or len(compatibility) > 500:
+            errors.append("compatibility must be non-empty and contain at most 500 characters")
+
+        # Validate every remaining field and the body with the managed validator.
+        # Normalize only a temporary copy; never rewrite the skill or validator.
+        normalized = {key: value for key, value in frontmatter.items() if key != "compatibility"}
+        with TemporaryDirectory(prefix="validate-skills-") as temporary:
+            content = "---\n" + yaml.safe_dump(normalized, sort_keys=False) + "---" + text[match.end():]
+            (Path(temporary) / "SKILL.md").write_text(content, encoding="utf-8")
+            valid, message = validator.validate_skill(temporary)
+    else:
+        valid, message = validator.validate_skill(folder)
+    if not valid:
+        errors.append(message)
+    if isinstance(frontmatter, dict):
+        description = frontmatter.get("description")
+        if isinstance(description, str) and not description.strip():
+            errors.append("description must not be empty or whitespace-only")
+        if valid and frontmatter["name"] != folder.name:
+            errors.append("frontmatter name must match the skill directory")
+    return errors
 
 
 def markdown_text(path):
@@ -146,17 +180,12 @@ def main():
     for path in dict.fromkeys(args.skills):
         folder = path.expanduser().resolve()
         try:
-            valid, message = validator.validate_skill(folder)
-            errors = [] if valid else [message]
+            errors = check_frontmatter(folder, validator)
             if (folder / "SKILL.md").is_file():
                 errors.extend(check_metadata(folder))
                 link_errors, count = check_links(folder)
                 errors.extend(link_errors)
                 errors.extend(check_provenance(folder, manifest))
-                if valid:
-                    match = re.match(r"^---\n(.*?)\n---", (folder / "SKILL.md").read_text(encoding="utf-8"), re.S)
-                    if yaml.safe_load(match[1])["name"] != folder.name:
-                        errors.append("frontmatter name must match the skill directory")
             else:
                 count = 0
         except (OSError, ValueError, KeyError, TypeError, AttributeError, yaml.YAMLError) as error:
