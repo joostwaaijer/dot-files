@@ -71,5 +71,70 @@
       "updatedAt": "2026-08-07T12:32:26.313Z"
     }
   },
-  "locally_modified": true
+  "locally_modified": true,
+  "adaptations": [
+    {
+      "source": "mattpocock/skills",
+      "sourceUrl": "https://github.com/mattpocock/skills",
+      "reviewedCommit": "5863806dd4e15c63174bee4e7515a4256792ecfa",
+      "adoptedOn": "2026-11-17",
+      "localPathsRelativeTo": "skills/",
+      "licensePath": "upstream-licenses/mattpocock.txt",
+      "skills": {
+        "retro": {
+          "upstreamPaths": ["skills/engineering/retro/SKILL.md"],
+          "localPaths": ["retro/SKILL.md", "retro/agents/openai.yaml"],
+          "adaptationNotes": [
+            "Preserve explicit-only use through Codex invocation policy.",
+            "Ground findings in the session's primary evidence and distinguish mistakes from discovery or changed requirements.",
+            "Inspect existing checks before proposing additions; do not prescribe hooks, new standards or automatic repairs.",
+            "Keep applicable standards relevant to both implementation and review, with existing edit, test, messaging and memory boundaries."
+          ]
+        },
+        "to-questionnaire": {
+          "upstreamPaths": ["skills/productivity/to-questionnaire/SKILL.md"],
+          "localPaths": ["to-questionnaire/SKILL.md", "to-questionnaire/agents/openai.yaml"],
+          "adaptationNotes": [
+            "Use normal Codex discovery; do not transplant the upstream harness's explicit-only frontmatter.",
+            "Inspect project sources and reuse known recipient context instead of requiring an interview.",
+            "Scale the questions to actual gaps and keep draft-only output separate from authorized file creation or sending.",
+            "Reuse project document locations and reconcile returned answers with canonical requirements and accepted decisions."
+          ]
+        },
+        "prototype": {
+          "upstreamPaths": [
+            "skills/engineering/prototype/SKILL.md",
+            "skills/engineering/prototype/LOGIC.md",
+            "skills/engineering/prototype/UI.md"
+          ],
+          "localPaths": [
+            "prototype/SKILL.md",
+            "prototype/LOGIC.md",
+            "prototype/UI.md",
+            "prototype/agents/openai.yaml"
+          ],
+          "adaptationNotes": [
+            "Choose the question before the artifact and reuse installed visualization, design and frontend capabilities.",
+            "Retain logic and UI exploration routes without mandatory HTML, variant counts, switchers or prototype branches.",
+            "Label simulated behavior and separate observations, user decisions and unverified integration claims.",
+            "Preserve test authorization and avoid automatic production promotion, commits, publication or external mutations."
+          ]
+        },
+        "codebase-design": {
+          "upstreamPaths": ["skills/engineering/improve-codebase-architecture/SKILL.md"],
+          "localPaths": [
+            "codebase-design/ARCHITECTURE-SCAN.md",
+            "codebase-design/SKILL.md",
+            "codebase-design/agents/openai.yaml"
+          ],
+          "adaptationNotes": [
+            "Add an architecture-scan route to the existing personal skill rather than another workflow.",
+            "Use scoped source and caller evidence, with recent change history as a lead rather than proof of poor design.",
+            "Compare retention and the smallest useful correction; preserve existing design criteria and accepted decisions.",
+            "Remove mandatory delegation, HTML reports, terminology bans, interviews and inline documentation writes."
+          ]
+        }
+      }
+    }
+  ]
 }

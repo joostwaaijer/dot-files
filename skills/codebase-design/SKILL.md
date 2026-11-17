@@ -1,6 +1,6 @@
 ---
 name: codebase-design
-description: Assess module interfaces, complexity, and test boundaries during architecture design or refactoring discussions.
+description: Assess module interfaces, complexity, and test boundaries during architecture design, refactoring discussions, or a scoped architecture scan.
 ---
 
 # Codebase Design
@@ -41,5 +41,6 @@ For delegated work, use an available [planner](/Users/joostwaaijer/.codex/agents
 
 ## Choose deeper guidance
 
+- To scan a codebase or subsystem for evidenced architectural friction and prioritize improvement candidates: [ARCHITECTURE-SCAN.md](ARCHITECTURE-SCAN.md). This is an analysis route, not an automatic refactoring workflow.
 - For consolidating a module cluster, dependency categories, adapter strategy, and test boundaries: [DEEPENING.md](DEEPENING.md).
 - When the user wants alternative interfaces for a chosen candidate: [DESIGN-IT-TWICE.md](DESIGN-IT-TWICE.md), including its scope and delegation conditions.

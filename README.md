@@ -36,6 +36,15 @@ personal use. They are now maintained directly in `skills/`; their former
 `~/.agents/skills/` paths are no longer used. Original installation metadata
 is retained in `skills/upstream-sources.json`.
 
+`retro`, `to-questionnaire`, and `prototype`, plus the architecture-scan route
+in `codebase-design`, are later adaptations from the same upstream repository.
+Their reviewed revision and adaptation decisions are recorded separately in
+`skills/upstream-sources.json`; the MIT notice is retained in
+`skills/upstream-licenses/mattpocock.txt`. `retro` is explicit-only. The other
+new skills retain normal discovery, with edits and external actions bounded
+by the requested task and existing authorization rules. No upstream plugin or
+automatic updater manages these personal copies.
+
 The scheduled **Review Robuust agent updates** task replaces the former sync task.
 It fetches upstream history, compares new logical changes with the personal
 versions, and proposes adoption, adaptation or skipping each change. Every

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Retro"
+  short_description: "Find supported improvements after a coding session"
+policy:
+  allow_implicit_invocation: false
