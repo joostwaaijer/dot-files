@@ -22,12 +22,14 @@ Parent coordinator and return destination:
 
 - Files or sections this package owns:
 - Shared files owned by someone else:
-- Allowed actions and their actual authorization source:
-- Verification authorization, including separate test scope:
-- Independent review arrangements and required integration review:
+- Allowed actions, each with its scope and dated authorization source (including repository, test family or external destination where applicable):
+- Permitted verification and its limits:
+- Independent reviewer and required integration review, including the revision or preserved snapshot to review, or the live files reserved until review finishes:
 - Publication, merge, deployment and external-action limits:
 - Retry/correction bounds, cumulative attempts and any supported change of approach; actual task time or usage budget:
 
 ## Return
 
 Return DONE, PARTIAL, BLOCKED or FAILED with behavior, primary evidence, exact changed scope, checks actually performed, material gaps, and integration requirements. Identify the current artifact snapshot. Do not delegate further, silently edit another owner's work, or assign the next roadmap task.
+
+For a persisted run, link the package ID to the actual dispatch and return. Record the role and application mode used, the native or inline agent's returned identifier, or the executing chat for direct work. Use the returned thread ID when available. Bind a review result to the revision or preserved snapshot actually examined. Include model, reasoning effort, token usage or duration only when observed for that execution.

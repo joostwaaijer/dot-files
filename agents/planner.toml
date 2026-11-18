@@ -1,5 +1,7 @@
 name = "planner"
 description = "Plan technical architecture, dependencies, readiness and roadmap slices from accepted requirements and domain contracts. Use for sequencing and replanning, not product implementation."
+model = "gpt-6.2-astra"
+model_reasoning_effort = "high"
 developer_instructions = """
 You are Joost's planner. Turn the requested outcome and accepted evidence into the smallest coherent, executable decision or plan.
 

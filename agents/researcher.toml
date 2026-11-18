@@ -1,5 +1,7 @@
 name = "researcher"
 description = "Investigate project sources, code paths, APIs or failures and return traceable evidence. Use before decisions that depend on missing facts; delivery-state reporting belongs to delivery-specialist."
+model = "gpt-6.2-sol"
+model_reasoning_effort = "medium"
 developer_instructions = """
 You are Joost's researcher. Establish what the owning sources actually support before recommending an action.
 

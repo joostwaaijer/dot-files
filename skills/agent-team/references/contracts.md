@@ -16,8 +16,8 @@ For research or writing, identify the source collection, document, or output wor
 | --- | --- |
 | `schema`, `objective` | Supported format and concrete outcome. |
 | `limits` | Positive `max_parallel` and `delegation_depth` fixed at 1 under [parallelism.md](parallelism.md); nonnegative `max_retries` and `max_rework_cycles` under [recovery.md](recovery.md). Record task-specific limits; runtime limits may be lower. |
-| `repositories` | Unique `id` plus actual root, branch/worktree, base revision and local-change context when relevant. The checker compares repository IDs, not aliases or physical paths; the coordinator must confirm distinct IDs are truly distinct write surfaces. |
-| `authorization` | A map of allowed action names to actual user authorization references. A declaration records authority; it does not create it. |
+| `repositories` | Give each repository a unique `id` and its checkout `root`. For a writer, include the inspected `branch` or `worktree`, `base` Git commit ID and `local_changes` (clean, or relevant existing changes to preserve). Resolve any abbreviated base unambiguously in the checkout. |
+| `authorization` | Match each restricted action to a grant for the named package and repository as described below. Each `reference` points to the user's actual authority. |
 | `contracts_existing` | Existing contract identifiers and their authoritative references in the brief. |
 | `independent_review` | Boolean, default true; every writing package then needs a dependent review package with a different owner. Disable only when the task's review requirements permit it, and report the review gap. |
 | `packages` | Unique `id`, `owner`, `kind`, `repository`, `writes`, `depends_on`, `produces`, `consumes`, `actions`, `criteria`, `skills`, and optional `reviews`. |
@@ -25,10 +25,30 @@ For research or writing, identify the source collection, document, or output wor
 | `writes` | Repository-relative exact files or directory prefixes ending `/`. `.` owns the whole repository. No globs, parent traversal, or absolute paths. Document sections are not isolated files: serialize shared-document editing. |
 | `criteria` | Unique criterion references allocated to one package; existing requirement/criterion IDs remain canonical. A reviewer references the reviewed criteria through `reviews`, not duplicated criterion entries. |
 | `produces`, `consumes` | A consumer transitively depends on each new contract's producer; pre-existing contracts are declared separately. |
-| `reviews` | Existing packages owned by other agents; the reviewer waits transitively for all of them. |
-| `actions` | Subset of declared authorization: `read`, `edit`, `write_tests`, `run_tests`, `commit`, `push`, `publish_pr`, `merge`, `deploy`, `message_chat`, `external_message`. Test writes require both edit and write_tests authority. |
+| `reviews` | Existing packages owned by other agents. The reviewer waits transitively for every target. Use optional `review_snapshots` to bind individual targets to immutable input. |
+| `actions` | Request each action with the scope below. Read-only packages (`decide`, `analyze`, `review`) may declare `read`, explicitly authorized `run_tests` and a scoped `message_chat` to report their outcome. Pure delivery can use the existing bounded action brief under [agent-profiles.md](agent-profiles.md). |
 
-Record a shared edit surface under one repository ID. The checker conservatively compares paths case-insensitively. It does not inspect symlinks, actual diffs, Git state, tools, or external services, and does not enforce maximum concurrency at runtime. Its topological waves are a static scheduling preview; use [parallelism.md](parallelism.md) for execution.
+### Scope each action
+
+Use a single `authorization.read` source reference when the user's instruction covers all reads in the plan. For narrower read authority and for every other requested action, place grants in `authorization.<action>` with `package`, `repository` and `reference`. A reviewer's `read` request covers its own repository and every review target's repository. With scoped read authority, each distinct repository needs a grant naming that reviewer.
+
+Include the qualifying field below in both the grant and the package action. The checker matches the values literally. Split multiple test families or destinations into individual requests and grants.
+
+| Action | Entry in the package's `actions` |
+| --- | --- |
+| `read`, `edit`, `commit` | The action name as a string. A writer needs `edit` for its declared paths. |
+| `write_tests`, `run_tests` | An object such as `{"action":"run_tests","test_family":"public-view API suite"}`. Test edits also require an `edit` grant. |
+| `push`, `publish_pr`, `merge`, `deploy`, `message_chat`, `external_message` | An object such as `{"action":"push","destination":"origin/feature/example"}`. Identify the authorized remote and ref, PR/base, environment, chat or recipient as applicable. |
+
+The example grants the backend worker one named suite and the reviewer one chat destination. Inspect the original source for any narrower conditions before acting. To reuse an older plan, copy it for the new run and replace each used plan-wide restricted reference with matching scoped grants derived from the original instruction. Fill in the qualifiers the old plan omitted. An unused historical reference grants nothing. If the source leaves a requested action unresolved, leave that action out or obtain the missing authority before scheduling it.
+
+### Keep review input stable
+
+By default a review uses each target's live files. For every writer whose declared paths intersect that target in its repository, order the writer before the target or after the review. This applies even when the writer has already finished between the target and the review. For example, if A and B change the same file and A precedes B, use A → review of A → B for a live review of A.
+
+To schedule B independently of that review, record `review_snapshots.A` on the reviewer. Use `{"revision":"<full Git commit ID>"}` for an existing committed result, or `{"base":"<full Git commit ID>","artifact":"<saved patch or bundle path>","sha256":"<64 hex digits>"}` for local changes. Preserve all relevant files, including untracked content. The target identifies the repository. At handoff, verify that the snapshot contains the target's output and matches its digest when supplied. The reviewer reads the preserved input. If the output does not exist yet, plan a live review with ordering, or bind the completed output and recheck the plan before releasing the overlapping writer.
+
+Record a shared edit surface under one repository ID. The checker compares declared paths case-insensitively. The coordinator verifies checkout identity, symlinks, actual changes, snapshot contents, and any additional inputs read during review. The printed waves preview scheduling. [parallelism.md](parallelism.md) governs execution.
 
 ## Handoff receipt
 

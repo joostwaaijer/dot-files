@@ -55,7 +55,7 @@ Apply the independent-review requirements in [parallelism.md](references/paralle
 
 Use [recovery.md](references/recovery.md) for retry and correction bounds. These bound repeated unsuccessful approaches, not the whole assignment; continue a supported alternative within the existing scope and authority when useful progress remains possible.
 
-Inherit current model and reasoning settings unless the user or applicable instructions request overrides. Keep current global configuration intact. Use actual runtime controls for supplied budgets, record observed usage only, and disclose when a strict cost or time cap cannot be enforced. Reviewer read-only instructions and write ownership are behavioral constraints; subagents inherit the parent permissions.
+Use the selected profile's [model and context settings](references/agent-profiles.md#load-the-actual-profile). Use actual runtime controls for supplied budgets, record observed usage only, and disclose when a strict cost or time cap cannot be enforced. Reviewer read-only instructions and write ownership are behavioral constraints; subagents inherit the parent permissions.
 
 At an exhausted task budget, stop launching affected work, safely interrupt outstanding agents, preserve partial artifacts, and report the remaining gaps.
 

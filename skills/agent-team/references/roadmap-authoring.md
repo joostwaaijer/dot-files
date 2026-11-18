@@ -26,7 +26,7 @@ Estimates, milestone dates and priority scores are optional. Use existing priori
 
 ## Order by dependency and risk
 
-Model the dependency graph and remove cycles or identify the decision needed to resolve them. Contract producers precede consumers. Steps may run in parallel only when their outcomes, contracts, write ownership, merge and rollout paths are genuinely independent. Share one task owner across tightly coupled repositories when that keeps the contract coherent.
+Model the dependency graph and remove cycles or identify the decision needed to resolve them. Contract producers precede consumers. Identify independent steps by their outcomes, contracts, write ownership, merge and rollout paths. Only an explicit user instruction to start such steps together permits concurrent task chats. For automatic progression, apply the current step's merge rule in [roadmap coordination](roadmap.md#receive-reports-and-advance). Share one task owner across tightly coupled repositories when that keeps the contract coherent.
 
 Readiness is evaluated per step, not as a single global approval:
 

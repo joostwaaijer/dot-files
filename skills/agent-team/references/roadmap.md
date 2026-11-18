@@ -12,7 +12,7 @@ Create a user-owned task chat only when the user explicitly asks for one or appl
 
 ## Prepare a step
 
-Read the authoritative roadmap, actual prerequisites, applicable rules, and last completion reports. Identify the smallest coherent observable outcome, its acceptance criteria, relevant repositories and base revisions, and existing local changes. Reuse the authorized checkout and preserve its work. Freeze unsettled producer/consumer contracts before splitting dependent implementation.
+Read the authoritative roadmap, actual prerequisites, applicable rules, and the latest accepted report for each relevant step. Identify the smallest coherent observable outcome, its acceptance criteria, relevant repositories and base revisions, and existing local changes. Reuse the authorized checkout and preserve its work. Freeze unsettled producer/consumer contracts before splitting dependent implementation.
 
 Use [step-handoff.md](../templates/step-handoff.md). A clean handoff contains:
 
@@ -21,7 +21,7 @@ Use [step-handoff.md](../templates/step-handoff.md). A clean handoff contains:
 - Relevant decisions and exact source pointers, with material uncertainty.
 - Repositories, branches/worktrees, expected bases, local work, and checkout ownership.
 - Dependencies and any required merge or rollout order.
-- Exact verification and publication authorization, including its source and limits.
+- Current decisions for the actions in scope, including the dated source and limits of verification and publication authority.
 - Coordinator chat ID and host, reporting rules, and the user's standing messaging authorization where it actually exists.
 
 Keep conversation transcripts and stale implementation history out of the handoff. Attach enough evidence to work correctly without inheriting the whole coordinator conversation.
@@ -50,12 +50,12 @@ Task chats send one completion report or material blocker when directly authoriz
 
 On a completion or merge report, inspect the concrete result and verify **every required PR** for that step against the provider's current state. CI success, auto-merge enabled, a worker's claim, or one merged PR in a pair is insufficient. A closed-unmerged PR remains unresolved unless explicitly replaced or cancelled.
 
-Start the next agreed dependent task only after its prerequisite merge gates pass, any separately required rollout gates pass, and execution/new-chat authority still applies. Re-read current checkout status before transferring write ownership. A prior task must not continue editing after ownership has transferred.
+Automatically start the next agreed task in a clean chat only once every PR required for the current step has merged, even when the next step is technically independent. Its prerequisites and any required rollouts must also have passed, and execution/new-chat authority must still apply. When the current step requires no PR, record that fact. Re-read current checkout status before transferring write ownership. A prior task must not continue editing after ownership has transferred.
 
-A pending merge does not block an explicitly independent, authorized step with separate checkout ownership and no shared contract or rollout prerequisite. Preserve the agreed roadmap policy: Salta's existing sequential merge-gated slices remain sequential unless the user changes that agreement. Parallelize useful work inside the current slice without creating extra user-owned chats merely to increase concurrency.
+Run separate steps concurrently only on an explicit user instruction to start those independent steps together. Carry the instruction into their handoffs and verify separate checkout ownership and independent contracts, merge paths and rollout paths. Within one step, independent packages can run in parallel under [parallelism.md](parallelism.md).
 
-When work completes before merge, report `awaiting merge`. A later merge needs a new user message, an authorized notification, or another real trigger; do not promise automatic detection without one. Prefer event-driven completion reports over repeated snapshots. A user-requested watch is followed within that active task using supported bounded waits, not a scheduled automation.
+When work completes before merge, record `awaiting merge`, the pending PRs, who will recheck them and what will prompt that check. Identify the existing authorized notification or active user-requested watch. If neither exists, record that the coordinator needs a new user message. Follow a requested watch within its active task using supported bounded waits. On the trigger, check every required PR against the provider again.
 
 ## Resume safely
 
-Read the state, the last accepted report, and the currently owning task. Refresh only facts that can have changed and matter to the next action: local work, PR revisions and state, deployments, or blockers. Use compact thread snapshots for progress. Never create a duplicate task because its previous chat ended or because an unchanged status is old.
+Keep one pointer per active step to its latest accepted report, including when that report lives in a different run directory or task chat. Update the pointer when the coordinator accepts a report. Retain earlier reports and their evidence. Follow [recovery.md](recovery.md) to recover an older state and reconcile action authority. Refresh only facts relevant to the next action, such as current ownership, local work, PR revisions and state, deployments or blockers. Use compact thread snapshots for progress. Never create a duplicate task because its previous chat ended or because an unchanged status is old.

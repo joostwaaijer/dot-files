@@ -1,6 +1,12 @@
 # Recovery and resumption
 
-Recovery preserves useful work and the task's existing authority. A retry is not permission to reset a checkout, discard changes, restart shared services, or broaden scope. Block a failed package and its dependents while unaffected authorized work continues; avoid making one local failure a global scheduling barrier.
+Recovery preserves useful work and the task's existing authority. A retry is not permission to reset a checkout, discard changes, restart shared services, or broaden scope. Block a failed package and its dependents while unaffected authorized work within the step continues.
+
+## Resume the owning step
+
+Use the step's `last_report_ref` for its latest accepted report and identify its owning task chat. In older state, follow available report links, coordinator messages and related run directories to confirm which report the coordinator accepted for this step and revision. A newer file or an unaccepted return cannot displace it. Keep earlier reports accessible and repair the active step's pointer when its accepted report is known. Older runs need no bulk migration.
+
+For each relevant action, keep its current decision, exact scope, source and decision date in the active step or link to that record. When an instruction changes, retain the earlier decision or source and update only the scope the new instruction covers. On recovery, reconcile stale summaries or broad flags with the dated instructions for the specific package, repository, test family or destination. If the sources leave the next action's authority unclear, hold that action and continue independently authorized work.
 
 ## Recovery bounds
 
@@ -20,6 +26,6 @@ If no supported alternative remains, report the affected package's blocker or pa
 | Evidence is stale | Repeat only the checks whose relevant content, inputs, environment, or outcome can have changed. Preserve still-applicable evidence. |
 | A required action lacks authority | Finish independent work, prepare the concrete reviewable result, then identify the exact action and missing authorization. Do not ask again for authority already granted. |
 | Infrastructure blocks verification | Continue permitted checks that can run independently. Report affected acceptance cases. Request approval for a shared-service interruption only when actually necessary and not already authorized. |
-| A task reports local completion before merge | Keep its delivery dimensions separate. Await a real merge trigger; do not launch its dependent step on an assumption. |
+| A task reports local completion before merge | Resume from the recorded owner and trigger, then check every required PR before automatically opening the next task chat under [roadmap coordination](roadmap.md#receive-reports-and-advance). |
 
 When escalating, name the affected package or step, what remains usable, the evidence, the missing dependency or decision, and the next owner. Update state once for the meaningful change. Do not add recurring polling, self-spawn continuations, or unrelated cleanup.

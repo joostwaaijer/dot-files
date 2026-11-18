@@ -1,5 +1,7 @@
 name = "implementer"
 description = "Implement or correct an agreed behavior, document or artifact and perform permitted verification. Use for scoped writes and execution with the relevant stack or artifact skills."
+model = "gpt-6.2-sol"
+model_reasoning_effort = "high"
 developer_instructions = """
 You are Joost's implementer. Complete the agreed observable result using the project's existing contracts and supported tools.
 

@@ -40,7 +40,7 @@ Discover relevant skills from the current catalog; do not assume L-GEVITY's enti
 | Engineering | Matching stack and component skills | A bounded artifact within the assigned write set. |
 | Research and drafting | Research, source connectors, document or presentation skills | Evidence report or cited draft. |
 | Verification | Relevant review skill and permitted checks | Independent findings and criterion-level evidence. |
-| Functionality and frontend preservation | Regression-reviewer, exact baseline, agreed scope and affected consumers | Concrete unintended differences or a bounded preservation conclusion with verification limits. |
+| Functionality and frontend preservation | Regression-reviewer or an independent reviewer explicitly assigned preservation, with the exact baseline, agreed scope and affected consumers | Concrete unintended differences or a separate preservation conclusion with verification limits. |
 | Delivery | Repository-specific PR workflow | Reviewable local work or an authorized publication result. |
 
 A capability is a responsibility for this task. One profile may support several capabilities, and multiple independent owners may use the same profile. Keep an agent's reused context suitable for its role and retain reviewer independence under agent-profiles.md. Add specialized security, accessibility, infrastructure, or scientific review only when requested, required by the project, or justified by a concrete risk.
@@ -49,6 +49,6 @@ A capability is a responsibility for this task. One profile may support several 
 
 Use [parallelism.md](parallelism.md) for readiness, write ownership, scheduling, and independent review. A cross-repository feature may belong in one task chat so its producer/consumer contract has one owner. Splitting by repository alone can create incompatible interfaces.
 
-Parallel roadmap steps additionally need independent merge and rollout paths under [roadmap.md](roadmap.md). An unmerged prerequisite prevents dependent execution even when file sets do not overlap.
+Parallel packages inside a step follow the scheduling rules above. Starting separate roadmap steps together requires an explicit user instruction and independent ownership, contracts, merge and rollout paths. For automatic progression to another task chat, apply the [current step's merge rule](roadmap.md#receive-reports-and-advance).
 
 Report the chosen route, work packages, owners, dependencies, and verification limits concisely when they materially affect the work. Do not force a fixed report format or every gate onto a routine task.

@@ -6,6 +6,7 @@ In scope, out of scope, and complete-when criteria:
 ## Coordinator
 
 - Coordinator chat ID and host:
+- Latest accepted report for this step, if resuming:
 - User authorization for this task to send completion reports or material blockers to that coordinator, with source:
 - Report once per meaningful outcome or blocker; include behavior, evidence and gaps, local status, PR links and live merge state.
 - Let the coordinator assign the next step. Do not schedule periodic polling.
@@ -21,6 +22,8 @@ In scope, out of scope, and complete-when criteria:
 - Repositories, branch/worktree, expected base revisions and existing local changes:
 - Who owns each checkout during this task:
 - Prerequisite PRs and confirmed merge evidence:
+- PRs required to complete this step's merge gate, when known:
+- If starting steps together, the user's explicit instruction and the independent paths they own:
 - Required producer/consumer contract and rollout order:
 - Intended changes versus preserved functionality/frontend structure; exact comparison baseline and affected existing consumers:
 
@@ -28,10 +31,10 @@ In scope, out of scope, and complete-when criteria:
 
 - Applicable rules and required skill paths:
 - Route each substantive action using [agent-profiles.md](/Users/joostwaaijer/.codex/skills/agent-team/references/agent-profiles.md); carry the selected profile, native/inline/direct application, and scoped context into each work package:
-- Authorized implementation scope:
-- Exact test authorization and its source, separated by project/test family:
+- Authorized implementation scope and dated source:
+- Explicit test authorization, with its dated source and scope by project/test family:
 - Permitted static, build and direct-inspection checks:
 - Local, hosted, browser and production cases required or explicitly outside scope:
-- Commit/push/PR/merge/deployment/runtime-activation authority and its source:
+- Applicable commit/push/PR/merge/deployment/runtime-activation decisions, each with its destination, scope and dated source:
 
 Complete the authorized local work before returning at a publication boundary. Keep this handoff self-contained without copying the coordinator's transcript. Refresh current status before edits and report any material mismatch.

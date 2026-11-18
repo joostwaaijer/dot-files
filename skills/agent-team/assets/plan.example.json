@@ -9,12 +9,27 @@
     "max_rework_cycles": 2
   },
   "repositories": [
-    {"id": "backend", "root": "/path/to/backend", "branch": "feature/example", "base": "replace-with-current-revision", "local_changes": "inspect before edits"},
-    {"id": "frontend", "root": "/path/to/frontend", "branch": "feature/example", "base": "replace-with-current-revision", "local_changes": "inspect before edits"}
+    {"id": "backend", "root": "/path/to/backend", "branch": "feature/example", "base": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "local_changes": "EXAMPLE: clean at inspection"},
+    {"id": "frontend", "root": "/path/to/frontend", "branch": "feature/example", "base": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "local_changes": "EXAMPLE: clean at inspection"}
   ],
   "authorization": {
-    "read": "EXAMPLE: replace with the actual task instruction",
-    "edit": "EXAMPLE: replace with the actual implementation authorization"
+    "read": [
+      {"package": "contract", "repository": "backend", "reference": "EXAMPLE: backend contract investigation"},
+      {"package": "backend-code", "repository": "backend", "reference": "EXAMPLE: backend task"},
+      {"package": "frontend-code", "repository": "frontend", "reference": "EXAMPLE: frontend task"},
+      {"package": "integrated-review", "repository": "backend", "reference": "EXAMPLE: integrated review of backend and frontend"},
+      {"package": "integrated-review", "repository": "frontend", "reference": "EXAMPLE: integrated review of backend and frontend"}
+    ],
+    "edit": [
+      {"package": "backend-code", "repository": "backend", "reference": "EXAMPLE: user task authorizing backend edits"},
+      {"package": "frontend-code", "repository": "frontend", "reference": "EXAMPLE: user task authorizing frontend edits"}
+    ],
+    "run_tests": [
+      {"package": "backend-code", "repository": "backend", "test_family": "public-view API suite", "reference": "EXAMPLE: user's explicit request to run this suite"}
+    ],
+    "message_chat": [
+      {"package": "integrated-review", "repository": "backend", "destination": "example-coordinator-chat", "reference": "EXAMPLE: user's authorization to report to this chat"}
+    ]
   },
   "contracts_existing": [],
   "packages": [
@@ -26,7 +41,8 @@
     {
       "id": "backend-code", "owner": "backend-worker", "kind": "implement", "repository": "backend",
       "writes": ["src/public-view/"], "depends_on": ["contract"], "produces": [], "consumes": ["public-view"],
-      "actions": ["read", "edit"], "criteria": ["AC-BACKEND"], "skills": ["project-backend-skill"]
+      "actions": ["read", "edit", {"action": "run_tests", "test_family": "public-view API suite"}],
+      "criteria": ["AC-BACKEND"], "skills": ["project-backend-skill"]
     },
     {
       "id": "frontend-code", "owner": "frontend-worker", "kind": "implement", "repository": "frontend",
@@ -37,7 +53,8 @@
       "id": "integrated-review", "owner": "independent-reviewer", "kind": "review", "repository": "backend",
       "writes": [], "depends_on": ["backend-code", "frontend-code"], "produces": [], "consumes": ["public-view"],
       "reviews": ["backend-code", "frontend-code"],
-      "actions": ["read"], "criteria": ["AC-INTEGRATED-REVIEW"], "skills": ["code-review"]
+      "actions": ["read", {"action": "message_chat", "destination": "example-coordinator-chat"}],
+      "criteria": ["AC-INTEGRATED-REVIEW"], "skills": ["code-review"]
     }
   ]
 }

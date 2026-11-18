@@ -3,17 +3,17 @@
   "run_id": "replace-with-task-run-id",
   "objective_ref": "existing roadmap, issue, specification, or user request",
   "coordinator": {"thread_id": "replace-with-coordinator-id", "host_id": "local"},
-  "updated_at": null,
+  "updated_at": "2026-11-18T10:30:00Z",
   "agent_usage": {
     "session_spawn_limit": null,
-    "spawned_total": 0,
-    "agent_ids": []
+    "spawned_total": 1,
+    "agent_ids": ["example-review-agent"]
   },
   "project_context_ref": "existing initialization or project brief",
   "requirements_ref": "canonical issue/specification or requirements register",
   "domain_model_ref": "canonical domain/model document, or not applicable with reason",
   "roadmap_ref": "canonical roadmap",
-  "discovery_status": "not_started",
+  "discovery_status": "complete",
   "steps": [
     {
       "id": "step-01",
@@ -21,23 +21,51 @@
       "source_refs": [],
       "contract_refs": [],
       "depends_on": [],
-      "task": null,
+      "task": {"thread_id": "example-step-chat", "host_id": "local"},
+      "current_action_decisions": [
+        {
+          "action": "publish_pr",
+          "scope": "backend repository, step-01 branch, one draft PR",
+          "decision": "authorized",
+          "decided_at": "2026-11-18",
+          "source_ref": "example coordinator chat, user message of 2026-11-18 authorizing the draft PR",
+          "previous_source_ref": "example coordinator chat, user message of 2026-11-17 to keep this branch local"
+        }
+      ],
+      "executions": [
+        {
+          "package_id": "review-backend",
+          "role": "reviewer",
+          "mode": "native",
+          "agent_id": "example-review-agent",
+          "thread_id": "example-review-thread",
+          "dispatch_ref": "example-step-chat, dispatch of review-backend",
+          "reviewed_revision": "backend@example-reviewed-commit",
+          "report_ref": "example-review-thread, return for review-backend"
+        }
+      ],
       "checkout_owners": [],
-      "readiness": "not_assessed",
-      "implementation": "not_started",
-      "review": "not_started",
-      "publication": "local_only",
-      "merge": "not_assessed",
+      "readiness": "ready",
+      "implementation": "locally_complete",
+      "review": "passed",
+      "publication": "pr_open",
+      "merge": "pending",
       "deployment": "not_assessed",
       "acceptance": "unverified",
-      "required_prs": [],
+      "required_prs": [
+        {"ref": "example backend PR", "head": "example-reviewed-commit", "merge": "pending"}
+      ],
+      "resume_on_merge": {
+        "owner": "coordinator",
+        "trigger": "new user message reporting the merge"
+      },
       "rollout_dependencies": [],
       "criteria": [],
       "evidence": [],
       "open_findings": [],
       "blockers": [],
-      "last_report_ref": null,
-      "next_action": "establish readiness from the current authoritative artifacts"
+      "last_report_ref": "example-step-chat, latest step report accepted by the coordinator",
+      "next_action": "on the recorded trigger, verify every required PR before starting the next task chat"
     }
   ]
 }
