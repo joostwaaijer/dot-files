@@ -1,5 +1,5 @@
-model = "gpt-6.1-sol"
-model_reasoning_effort = "high"
+model = "gpt-6.2-astra"
+model_reasoning_effort = "xhigh"
 sandbox_mode = "danger-full-access"
 notify = ["/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 service_tier = "default"
@@ -607,6 +607,12 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/joostwaaijer/Documents/workspace/robuust"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-heroku-internal"]
+trust_level = "trusted"
+
+[projects."/Users/joostwaaijer/Documents/workspace/craft-facebook-conversion"]
 trust_level = "trusted"
 
 [agents]

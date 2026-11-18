@@ -6,10 +6,10 @@ prompt = "Review new upstream changes in Robuust's agent guidance against Joost'
 model_prompt_sha256 = "8d38375f5f144167b9d096b6806858fb52fef20cd781ce0587e4e4a623ddf52f"
 status = "ACTIVE"
 rrule = "FREQ=DAILY;BYHOUR=9;BYMINUTE=0"
-model = "gpt-5.6-luna"
-reasoning_effort = "medium"
+model = "gpt-6.2-sol"
+reasoning_effort = "high"
 execution_environment = "local"
 target = { type = "project", project_id = "local-b3b40c986e7ebb56c087ec0a0bfa5687" }
 cwds = ["/Users/joostwaaijer/Documents/workspace"]
 created_at = 1787576549942
-updated_at = 1794903152033
+updated_at = 1794992187204
