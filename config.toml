@@ -1,5 +1,5 @@
-model = "gpt-6.2-astra"
-model_reasoning_effort = "xhigh"
+model = "gpt-6.2-sol"
+model_reasoning_effort = "high"
 sandbox_mode = "danger-full-access"
 notify = ["/Users/joostwaaijer/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 service_tier = "default"
