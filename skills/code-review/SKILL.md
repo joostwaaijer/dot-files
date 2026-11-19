@@ -38,6 +38,8 @@ If requirements are missing or incomplete, report which coverage cannot be asses
 
 Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
+For PHP or JavaScript changes, include the shared [Code Documentation](../../agents/templates/org/AGENTS.md#code-documentation) rules in the Standards sources. Check changed declarations against those rules for required docblocks and type tags even when formatting passes.
+
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below — a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
 - **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.

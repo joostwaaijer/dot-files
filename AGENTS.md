@@ -33,6 +33,7 @@
 
 # Implementation Choices
 
+- Before adding or modifying PHP or JavaScript declarations, read and apply the shared [Code Documentation](agents/templates/org/AGENTS.md#code-documentation) rules to the declarations in scope.
 - Before implementing or changing Laravel + Vue Inertia behavior, use the shared `inertia-best-practices` skill from `robuust/robuust-agents` and apply its developer decision workflow to any uncovered choice.
 - Before adding abstractions, transport handling, local state, or dependencies, inspect the relevant existing implementation and supported framework or library APIs. Prefer the smallest solution that fits the established contracts, and explain any necessary departure from existing patterns.
 - Keep authoritative data and behavior in their owning layer. Avoid duplicate state, parallel validation, or renamed copies of existing contract fields without an evidenced need.
