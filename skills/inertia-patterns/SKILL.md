@@ -7,6 +7,8 @@ description: Implement or review Laravel + Inertia + Vue forms, validation, subm
 
 Give each interaction one owner for submission, validation errors, and processing state. Apply these shared conventions alongside the project's version-specific Inertia guidance; explicit user instructions and applicable repository rules take precedence.
 
+For the team's defaults on dialog composition, controller responses and shared data, use [Inertia best practices](../inertia-best-practices/SKILL.md). The interaction patterns below cover the form lifecycle once that contract is chosen.
+
 For review-only requests, inspect and report findings without editing code or publishing comments. Implement corrections only within an authorized implementation scope; reading this skill does not widen it.
 
 ## Resolve the relevant contract
@@ -19,7 +21,7 @@ For review-only requests, inspect and report findings without editing code or pu
 
 ## Choose one form owner
 
-- Prefer `<Form>` for straightforward submissions driven by named fields. Prefer `useForm` when editable values need programmatic ownership, such as switching the record in a reused drawer. Neither API is mandatory for every form.
+- Prefer `<Form>` for ordinary submissions driven by named fields, including edit drawers. Choose `useForm` when programmatic ownership of the draft or submission provides a concrete benefit. A reused drawer may still use a declarative Form for submission.
 - Read errors and processing directly from the chosen owner. Do not mirror them into local refs or synchronize them between `<Form>`, `useForm`, and page errors without a concrete integration need.
 - Use the owner's submission and reset/default APIs for the required lifecycle. Keep handlers for actual behavior such as closing after success; remove handlers that only duplicate framework bookkeeping. A direct router visit remains appropriate when the interaction is navigation or has requirements the form APIs do not cover.
 - For normal Laravel/Inertia validation, keep the redirect/session-error flow and display the owner's errors. Do not introduce JSON `422` parsing or a second error store for that flow. Preserve a deliberately separate API contract where one exists.

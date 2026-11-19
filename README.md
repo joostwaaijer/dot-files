@@ -7,7 +7,7 @@ Personal Codex configuration. This repository's root maps directly to
 
 - `config.toml`: current settings, MCP configuration, and local project settings.
 - `AGENTS.md`: global agent instructions.
-- `skills/`: user-installed skills maintained as physical local copies.
+- `skills/`: user-installed skills. The `inertia-best-practices` symlink loads the shared skill from the `robuust-agents` checkout. Other managed skills are local copies.
 - `agents/`: personal profiles and the supporting instruction references/template.
 - `references/robuust-agents/`: reference-only snapshots of related guidance;
   these are not installed skills.

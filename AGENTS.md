@@ -33,6 +33,7 @@
 
 # Implementation Choices
 
+- Before implementing or changing Laravel + Vue Inertia behavior, use the shared `inertia-best-practices` skill from `robuust/robuust-agents` and apply its developer decision workflow to any uncovered choice.
 - Before adding abstractions, transport handling, local state, or dependencies, inspect the relevant existing implementation and supported framework or library APIs. Prefer the smallest solution that fits the established contracts, and explain any necessary departure from existing patterns.
 - Keep authoritative data and behavior in their owning layer. Avoid duplicate state, parallel validation, or renamed copies of existing contract fields without an evidenced need.
 - Complete the agreed behavior and required checks. Propose optional refinements only when their practical benefit justifies the extra work; avoid unrelated cleanup and repeated redesign without new evidence.
