@@ -6,7 +6,9 @@
 
 # Questions
 
-- When open questions for me decide the next step (a choice, scope, a preference), ask them right away in your question tool, unprompted and in every mode, including Codex Default mode: `AskUserQuestion` in Claude Code; `request_user_input_async` in Codex, or `request_user_input` in Plan mode. Filling in a form beats reading back and answering by hand.
+- If the request, prior decisions, and relevant project sources leave more than one reasonable way to proceed, ask me which option to use. This includes small implementation and design choices, even when you can imagine a reasonable default. Apply this threshold across projects, including when general workflow guidance delegates routine choices. Ask also when the answer is necessary for correctness or authorization.
+- Ask as soon as you identify the unresolved choice. State what needs deciding and, when helpful, give concrete options with their practical differences. Wait for my answer before doing work that depends on it. Continue independent investigation and agreed work while waiting.
+- Use `AskUserQuestion` in Claude Code, `request_user_input_async` in Codex Default mode, or `request_user_input` in Codex Plan mode. If the question tool is unavailable, ask in chat.
 
 # Transparency
 
@@ -19,7 +21,7 @@
 
 # Scope and Decisions
 
-- Before changes with material behavior or design choices, establish the intended observable result, affected contracts, and unresolved choices from the request, prior decisions, and relevant code. Ask only when a missing answer materially changes correctness, scope, or authorization; continue independent authorized work while waiting. Resolve routine choices without a mandatory planning or approval round.
+- Before changes with material behavior or design choices, establish the intended observable result and affected contracts from the request, prior decisions, and relevant code. Follow Questions for unresolved choices. Apply established project patterns where they determine the implementation and keep the change within the agreed scope. Leave optional features and unrelated cleanup out unless requested.
 - Before repository edits, confirm the selected repository, branch or worktree, and existing local changes. Preserve user-authored work and use the checkout authorized for the task.
 - Carry settled decisions across follow-ups. Revisit them only when new evidence or changed requirements warrant it, and explain the practical effect on the existing solution. Treat necessary discovery and changed requirements as legitimate iteration.
 
